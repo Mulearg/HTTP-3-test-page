@@ -1,0 +1,34 @@
+# Dependencies and build output.
+# app/.gitignore already covers these for the app itself; repeated here so the
+# rules hold no matter which directory the repo is initialised in.
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Generated previews from the earlier design-canvas pass. These are OUTPUTS,
+# not source — rayobyte-http3-landing-page.html alone is 2.5 MB — and they
+# predate the Figma reconciliation, so they no longer reflect the build.
+# The sources they came from (Main.dc.html, Mobile.dc.html, canvas.json) are
+# kept, since they document how the design was arrived at.
+rayobyte-http3-desktop.html
+rayobyte-http3-desktop.pdf
+rayobyte-http3-mobile.html
+rayobyte-http3-mobile.pdf
+rayobyte-http3-landing-page.html
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.sw?

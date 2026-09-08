@@ -1,0 +1,187 @@
+/* ---------------------------------------------------------------------------
+   Footer (27953:18). Insets 86px — the chrome gutter.
+
+   Ground is chrome.footer #282828 — charcoal, deliberately NOT ink.primary.
+   The token file is explicit: "the footer is not the same dark as the hero or
+   CTA bands", and the artboard's Closing CTA band above it proves the point.
+
+   Column headings are image.sky #07B6BF. That colour "never sets type" on
+   light grounds (2.48:1 on white) but it is 5.9:1 on this charcoal, so it is
+   legal here — the warning is scoped to light grounds, not absolute.
+--------------------------------------------------------------------------- */
+
+.footer {
+  background: var(--color-chrome-footer);
+  color: var(--color-ground-white);
+  padding-block: 56px;
+}
+
+.inner {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.brand {
+  flex: none;
+  width: 268px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* 157 x 29.606, matching the nav lockup — not the asset's native 175 x 33. */
+.logo {
+  width: 157px;
+  height: 29.606px;
+}
+
+.copyright {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-chrome-muted);
+  max-width: 250px;
+}
+
+.legal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.legalLink {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-ground-white);
+  transition: opacity 0.2s;
+}
+
+.legalLink:hover {
+  opacity: 0.75;
+}
+
+.legalSep {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  flex: none;
+}
+
+.awardLine {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-image-sky);
+}
+
+.award {
+  width: 65px;
+  height: 65px;
+}
+
+.column {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.columnTitle {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-image-sky);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ground-white);
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 0.75;
+}
+
+.linkChevron {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.contact {
+  flex: none;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* The social SVGs ship with their own 1px chrome.control-edge box baked in —
+   do not redraw it. 44 x 44 each. */
+.socialIcon {
+  width: 44px;
+  height: 44px;
+}
+
+.contactTitle {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+  color: var(--color-image-sky);
+}
+
+.address {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ground-white);
+}
+
+.qr {
+  width: 75px;
+  height: 76px;
+}
+
+@media (max-width: 1180px) {
+  .inner {
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+  .brand,
+  .contact {
+    width: 100%;
+  }
+  .column {
+    flex: 1 1 200px;
+    min-width: 160px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footer {
+    padding-block: 40px;
+  }
+}

@@ -1,0 +1,42 @@
+/* Traps (27969:14). Left-aligned head, three equal cards with numeral tiles. */
+
+.grid {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.card {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.title {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+/* Trap bodies are ink.secondary on white, where the token's 4.6:1 guarantee
+   holds — unlike the Why HTTP3 cards, which the artboard sets in full ink. */
+.body {
+  color: var(--color-ink-secondary);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card {
+    padding: 22px;
+  }
+}

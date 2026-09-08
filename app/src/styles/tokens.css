@@ -1,0 +1,253 @@
+/* ---------------------------------------------------------------------------
+   Rayobyte design tokens — generated from rayobyte.tokens.json (W3C DTCG).
+   Every value here is traceable to that file. Do not invent values; if you need
+   one that is not here, add it to the token file first.
+
+   Hard constraints carried over from the token file's `_rules` group:
+   - --color-action-cta (#04B81E) sets FILLS ONLY. As type it is 2.66:1 and
+     fails AA on white and on any near-white tint. Affirmative text uses
+     --color-image-sky-deep (#016F74).
+   - --color-action-nav (#1B4DCA) is the nav-bar CTA fill and nothing else.
+     Never a body CTA, never an icon glyph.
+   - Retired, must never appear: #A358FC #FFBE38 #FF5A3C #FF7A08 #1EB84B #18B82A
+   - Gradients are forbidden on buttons, badges, form controls, text fills, and
+     icons under 48px. Actions are flat.
+--------------------------------------------------------------------------- */
+
+:root {
+  /* --- ink ------------------------------------------------------------- */
+  /* All text, every weight. 19.75:1 on white. Also the correct label colour
+     on the CTA green. */
+  --color-ink-primary: #050038;
+  /* Captions, meta, legal. 4.6:1 on white — passes AA for normal text. */
+  --color-ink-secondary: #757575;
+
+  /* --- action ---------------------------------------------------------- */
+  /* Body CTA fill. Label MUST be --color-ink-primary (7.41:1). */
+  --color-action-cta: #04B81E;
+  /* Body CTA hover, the token file's own value: derived at 87% of base RGB,
+     same hue, no jump. NOT what ships — kept because it is the token, and
+     because it is the one-line revert if the sage below is ever rejected. */
+  --color-action-cta-hover: #03A01A;
+
+  /* What the primary CTA actually hovers to. This is button.primary-hover —
+     the sage taken verbatim from rayobyte.com and drawn in the Figma
+     component set (Button / Primary, State=Hover, 28004:26).
+
+     Both the token file and Figma's component description flag it as
+     unverified: it appears exactly once in 368KB of CSS, is in no palette,
+     and desaturating a primary CTA on hover is backwards as an affordance.
+     Shipped anyway, by decision, because it is what the design and production
+     both show — and because #03A01A is so subtle it reads as no feedback.
+
+     Named separately from --color-action-cta-hover so the token keeps its
+     meaning and the divergence stays visible instead of overwriting it. */
+  --color-action-cta-hover-shipped: #81A786;
+
+  /* Body CTA pressed. Derived at 75% of base RGB. */
+  --color-action-cta-press: #038A17;
+  /* Nav bar CTA fill only. Label white — 7.09:1, passes. */
+  --color-action-nav: #1B4DCA;
+  /* Nav CTA pressed. Deepens the hover inversion rather than the base fill —
+     the artboard's Pressed variant is a #F8F8F8 ground with this as border and
+     label (Button / Nav, State=Pressed, 28006:25). */
+  --color-action-nav-press: #133791;
+
+  /* --- image ----------------------------------------------------------- */
+  /* Gradient stops and illustration only — neither sets type. */
+  --color-image-pink: #EE3889;
+  --color-image-sky: #07B6BF;
+  /* The accessible member of the family: affirmative small text on white. */
+  --color-image-sky-deep: #016F74;
+
+  /* --- ground ---------------------------------------------------------- */
+  --color-ground-white: #FFFFFF;
+  --color-ground-tint: #F2F5FD;
+  --color-ground-grey: #F2F2F2;
+  --color-ground-hairline: #E1E6F4;
+
+  /* --- chrome ---------------------------------------------------------- */
+  /* Colours the site's nav, footer and logo actually use. Recorded so the
+     chrome stops failing palette audits, not because the palette is this wide. */
+
+  /* The logo lockup's wordmark. NOT ink-primary — the brand mark and body ink
+     are deliberately different blacks. Do not "correct" it to #050038. */
+  --color-chrome-wordmark: #231F20;
+  /* Nav utility bar. A WARM grey, unlike ground-tint which is cool. */
+  --color-chrome-band: #F4F2F6;
+  /* Footer ground. Charcoal, not ink-primary. */
+  --color-chrome-footer: #282828;
+  --color-chrome-muted: #B4B4B4;
+  --color-chrome-chevron: #999999;
+  /* Border on the footer social icon boxes. Ships INSIDE the youtube.svg and
+     x.svg assets — do not redraw the box. */
+  --color-chrome-control-edge: #5F5F5F;
+  /* Fill the nav CTA inverts to on hover. */
+  --color-chrome-surface-hover: #F8F8F8;
+
+  /* --- type ------------------------------------------------------------ */
+  /* The entire brand. Variable weight, 400-700. No secondary face. */
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  /* Documented exception to "no secondary face": code samples need a mono or
+     shell syntax loses its column alignment. Two blocks only. */
+  --font-family-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular',
+    Consolas, monospace;
+
+  /* Desktop ramp. The token file records no mobile ramp (_rules.scale-gaps);
+     mobile keeps the same families and weights at proportionally smaller
+     sizes, applied per-component rather than as a second set of tokens. */
+  --type-h1-size: 60px;
+  --type-h1-line: 72px;
+  --type-h1-tracking: -0.6px;
+  --type-h1-weight: 700;
+
+  --type-h2-size: 50px;
+  --type-h2-line: 62.5px;
+  --type-h2-tracking: 0;
+  --type-h2-weight: 700;
+
+  --type-h3-size: 32px;
+  --type-h3-line: 42px;
+  --type-h3-weight: 700;
+
+  --type-h4-size: 24px;
+  --type-h4-line: 32px;
+  --type-h4-weight: 600;
+
+  --type-card-size: 18px;
+  --type-card-line: 36px;
+  --type-card-weight: 700;
+
+  --type-body-size: 16px;
+  --type-body-line: 24px;
+  --type-body-weight: 500;
+
+  --type-button-size: 16px;
+  --type-button-line: 21px;
+  --type-button-weight: 700;
+
+  --type-caption-size: 12px;
+  --type-caption-line: 20px;
+  --type-caption-weight: 400;
+
+  /* --- radius ---------------------------------------------------------- */
+  --radius-pill: 100px;
+  --radius-card: 10px;
+  /* Deliberately LARGER than radius-card despite the tile being the smaller
+     object — a small square needs more corner to read as soft. */
+  --radius-tile: 16px;
+
+  /* --- spacing (button roles) ------------------------------------------ */
+  --space-button-y: 12px;
+  --space-button-x: 30px;
+  --space-nav-button-y: 8px;
+  --space-nav-button-x: 20px;
+
+  /* --- icon ------------------------------------------------------------ */
+  /* Feature icons are a glyph in a TILE, not a bare glyph. Bare thin strokes
+     on white read washed out at any brand colour; the tile solves that.
+     The tile carries the brand colour, the glyph carries the contrast. */
+  --icon-glyph-color: #050038;
+  --icon-glyph-stroke: 2px; /* on a 24px viewBox */
+  --icon-tile-size: 48px;   /* 44px on mobile */
+
+  /* --- gradients -------------------------------------------------------- */
+  /* Construction rule: a wash's far stops must be TRANSPARENT, never an opaque
+     ground colour. Baking the ground in welds the wash to one background and
+     breaks the opacity control. One gradient over one solid; the layer's own
+     alpha is the single honest control.
+     9% is the single wash level across the system — hero, body bands and icon
+     tiles all sit there. Only duotone-tint (imagery) sits above it at 18%. */
+
+  /* G-01. Full-bleed hero. Sky enters bottom-right, resolves to page ground
+     by 61% so content sits on a calm field. Composites over white. */
+  --gradient-hero-wash: linear-gradient(
+    315deg,
+    rgba(7, 182, 191, 0.09),
+    transparent 61%
+  );
+
+  /* G-03. Mirror of hero-wash for the feature-landing-page hero, so a campaign
+     page reads differently without leaving the palette.
+     Pick ONE per page: a hero takes hero-wash or pink-wash, never both. */
+  --gradient-pink-wash: linear-gradient(
+    315deg,
+    rgba(238, 56, 137, 0.09),
+    transparent 61%
+  );
+
+  /* G-02. IMAGERY level. Fully transparent — tints whatever sits behind it.
+     Imagery blocks, testimonial panels, media cards. Not for full-bleed
+     bands: 18% across a whole band overpowers the content sitting on it. */
+  --gradient-duotone-tint: linear-gradient(
+    135deg,
+    rgba(7, 182, 191, 0.18),
+    rgba(238, 56, 137, 0.18)
+  );
+
+  /* G-05. THE body-section wash: any full-bleed band that is not the hero uses
+     this and nothing else. Also the icon-tile wash.
+     HORIZONTAL, not 135deg: a band is much wider than it is tall, so a
+     diagonal compresses the whole sky-to-pink transition into one corner
+     while a horizontal run spreads it across the full measure.
+     Composites over ground-tint — over white it disappears. */
+  --gradient-duotone-band: linear-gradient(
+    90deg,
+    rgba(7, 182, 191, 0.09),
+    rgba(238, 56, 137, 0.09)
+  );
+
+  /* G-04. PROPOSED, not yet on the site. Same geometry inverted onto the dark
+     ground for footers and dark bands. Alpha rises to 28% because a tint works
+     harder over a dark ground. */
+  --gradient-deep-wash: linear-gradient(
+    315deg,
+    rgba(7, 182, 191, 0.28),
+    rgba(5, 0, 56, 0) 61%
+  );
+
+  /* --- layout ----------------------------------------------------------- */
+  /* Desktop artboard is 1440 wide. Measured off 27881:14.
+
+     The artboard uses TWO different gutters, which is easy to miss: the nav
+     and footer inset 86px, every body section insets 120px. That is why the
+     chrome reads slightly wider than the content it frames. */
+  --layout-page-max: 1440px;
+  --layout-gutter-body: 120px;
+  --layout-gutter-chrome: 86px;
+
+  /* Section rhythm, measured rather than guessed. Most body sections are 88px
+     top and bottom; the exceptions are noted at their component. */
+  --space-section-y: 88px;
+
+  /* Mobile equivalents (artboard 27889:14 is 390 wide). */
+  --layout-gutter-body-mobile: 20px;
+  --layout-gutter-chrome-mobile: 20px;
+  --space-section-y-mobile: 56px;
+}
+
+/* ---------------------------------------------------------------------------
+   SUPPORTING-TEXT RULE — added during the build, from a contrast audit.
+
+   color.ink.secondary's own description guarantees "4.6:1 on white". That
+   guarantee does NOT extend to the tinted grounds:
+
+       #757575 on ground.tint  #F2F5FD  = 4.22:1   FAILS AA
+       #757575 on chrome.band  #F4F2F6  = 4.14:1   FAILS AA
+
+   The palette has no darker neutral, so rather than invent one this is
+   expressed as a scoping rule: supporting text is ink.secondary on white and
+   steps up to ink.primary on any tinted ground. Sections set the property;
+   nothing needs to know the rule at the point of use.
+
+   Note also that ink.secondary is scoped by the token file to "Captions,
+   meta, legal" — body copy is ink.primary ("All text, every weight"). Running
+   text should use the default colour, not this property.
+
+   >> TOKEN GAP TO RESOLVE: there is no accessible supporting-text colour for
+   >> tinted grounds. Either add one to the palette or accept this step-up.
+--------------------------------------------------------------------------- */
+:root {
+  --color-text-support: var(--color-ink-secondary);
+}

@@ -1,0 +1,142 @@
+/* ---------------------------------------------------------------------------
+   Hero stream diagram (27882:28).
+
+   The panel that makes the head-of-line-blocking claim visual instead of
+   asserted: under identical packet loss, HTTP/2 stalls every stream while
+   HTTP/3 stalls only the one that lost a packet.
+
+   The bar colours carry the meaning, so they are semantic rather than
+   decorative:
+     flowing  image.sky      a stream still delivering
+     lost     image.pink     the dropped packet
+     stalled  ink @ 22%      a stream blocked behind it
+     empty    ground.hairline unfilled track
+
+   image.pink and image.sky set no type here — they are illustration, which is
+   exactly the scope the token file allows them.
+--------------------------------------------------------------------------- */
+
+.panel {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.label {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: var(--color-ink-secondary);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+/* Only the first block carries the divider, so the two read as a comparison
+   rather than as two unrelated groups. */
+.blockDivided {
+  border-bottom: 1px solid var(--color-ground-hairline);
+  padding-top: 16px;
+  padding-bottom: 4px;
+}
+
+.blockLast {
+  padding-top: 14px;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.name {
+  color: var(--color-ink-primary);
+}
+
+.verdict {
+  color: var(--color-ink-secondary);
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bar {
+  height: 8px;
+  border-radius: 4px;
+}
+
+/* Fixed 92px head segment and 14px packet marker; the tail takes the rest. */
+.lead {
+  flex: none;
+  width: 92px;
+}
+
+.marker {
+  flex: none;
+  width: 14px;
+}
+
+.tail {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.full {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.flowing {
+  background: var(--color-image-sky);
+}
+
+.lost {
+  background: var(--color-image-pink);
+}
+
+.stalled {
+  background: rgba(5, 0, 56, 0.22);
+}
+
+.empty {
+  background: var(--color-ground-hairline);
+}
+
+.caption {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ink-secondary);
+}
+
+@media (max-width: 900px) {
+  .panel {
+    padding: 20px;
+  }
+  .lead {
+    width: 64px;
+  }
+}

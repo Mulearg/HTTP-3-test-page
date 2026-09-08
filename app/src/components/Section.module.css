@@ -1,0 +1,83 @@
+/* ---------------------------------------------------------------------------
+   Section rhythm + grounds. Measured off the desktop artboard 27881:14 rather
+   than guessed — an earlier pass invented a 112px rhythm before the artboards
+   were reachable.
+
+   Body sections are 88px top and bottom (Why HTTP3 is 92, Closing CTA 76 —
+   both set at their own component). Every body section insets 120px; the nav
+   and footer inset 86 and use .container-chrome instead.
+--------------------------------------------------------------------------- */
+
+.section {
+  padding-block: var(--space-section-y);
+  overflow: visible; /* the secondary button's offset edge is drawn outside bounds */
+}
+
+.white {
+  background: var(--color-ground-white);
+}
+
+.tint {
+  background: var(--color-ground-tint);
+  /* ink.secondary is only accessible on white (4.22:1 here). On any tinted
+     ground supporting text steps up to ink.primary — see the supporting-text
+     rule at the foot of tokens.css. */
+  --color-text-support: var(--color-ink-primary);
+}
+
+/* THE body-section wash — duotone-band, horizontal, 9%, over ground.tint.
+   The artboard also puts a hairline rule top and bottom on the banded
+   sections, which is what separates them from the white ones either side. */
+.band {
+  background-image: var(--gradient-duotone-band);
+  background-color: var(--color-ground-tint);
+  border-block: 1px solid var(--color-ground-hairline);
+  --color-text-support: var(--color-ink-primary);
+}
+
+/* Dark band. The artboard uses ink.primary #050038 here — NOT chrome.footer
+   #282828, which is the footer's own charcoal and a different dark. */
+.dark {
+  background: var(--color-ink-primary);
+  color: var(--color-ground-white);
+  --color-text-support: rgba(255, 255, 255, 0.66);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+/* Why HTTP3, Comparison and Where it runs centre their heads; Protocols and
+   Traps keep theirs left. */
+.headCentered {
+  align-items: center;
+  text-align: center;
+}
+
+.eyebrow {
+  /* Affirmative/brand accent text is sky-deep, never the CTA green
+     (_rules.cta-green-is-a-fill-never-type). */
+  color: var(--color-image-sky-deep);
+  letter-spacing: 1.4px;
+}
+
+.dark .eyebrow {
+  color: var(--color-image-sky);
+}
+
+.lede {
+  color: var(--color-text-support);
+  max-width: 720px;
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding-block: var(--space-section-y-mobile);
+  }
+  .head {
+    margin-bottom: 28px;
+  }
+}

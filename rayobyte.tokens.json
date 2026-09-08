@@ -1,0 +1,422 @@
+{
+  "$description": "Rayobyte design tokens — W3C DTCG format. Extracted from https://rayobyte.com/products/residential-proxies/ on 2026-08-26, then narrowed by client decision the same day. Revised 2026-08-27, from building the HTTP/3 landing page: hero-wash and pink-wash rebuilt with transparent tails so a wash composites over any ground and its alpha is a single control; ground.grey is no longer the required hero underlay; duotone-band (G-05) added as the one body-section wash and duotone-tint narrowed to imagery; a new `icon` group specifies the glyph-in-a-tile pattern; and three rules added — cta-green-is-a-fill-never-type, gradient-construction, scale-gaps. Gradient levels now in use: 9% for every wash (hero, feature-page hero, body bands, icon tiles), 18% for imagery only. Revised again 2026-08-27 from building the nav, footer and button components against the live site: added color.chrome (seven colours the site chrome uses that this file never had), added the `button` group with measured specs and states for all three button roles, and flagged action.cta-hover / nav-hover / nav-press as unused in production. Import into Figma via Tokens Studio or a variables-import plugin. Note: Figma Variables do not support gradients — the `gradient` group must be created as Fill Styles, not variables. In Figma, gradientTransform is a forward map (t = m00*x + m01*y + m02 over normalized coords); [[-0.5,-0.5,1],[0.5,-0.5,0.5]] reproduces the 315deg geometry, putting t=0 at bottom-right.",
+  "color": {
+    "$type": "color",
+    "ink": {
+      "primary": {
+        "$value": "#050038",
+        "$description": "All text, every weight. 19.75:1 on white. Also the correct label color on the CTA green."
+      },
+      "secondary": {
+        "$value": "#757575",
+        "$description": "Captions, meta, legal. 4.6:1 on white — passes AA for normal text."
+      }
+    },
+    "action": {
+      "cta": {
+        "$value": "#04B81E",
+        "$description": "Body CTA fill. LABEL MUST BE #050038 (7.41:1). White on this green is 2.66:1 and fails AA — do not use white."
+      },
+      "cta-hover": {
+        "$value": "#03A01A",
+        "$description": "Body CTA hover. Derived at 87% of base RGB — same hue, no jump. NOT IN USE as of 2026-08-27: production hovers to #81A786 instead (see button.primary-hover), which is almost certainly unintentional. This value is the better one; adopting it would make the token real."
+      },
+      "cta-press": {
+        "$value": "#038A17",
+        "$description": "Body CTA pressed. Derived at 75% of base RGB."
+      },
+      "nav": {
+        "$value": "#1B4DCA",
+        "$description": "Nav bar CTA fill only. Label white — 7.09:1, passes."
+      },
+      "nav-hover": {
+        "$value": "#1741AC",
+        "$description": "Nav CTA hover. Derived at 85% of base RGB. DEAD TOKEN as of 2026-08-27: this hex appears nowhere in the production stylesheet. The nav CTA inverts on hover instead of darkening — see button.nav-hover. Either adopt this or delete it; right now the file claims a behaviour the site does not have."
+      },
+      "nav-press": {
+        "$value": "#133791",
+        "$description": "Nav CTA pressed. Derived at 72% of base RGB. DEAD TOKEN: no :active rule exists anywhere on the site. Used only as the derived Pressed state in the Figma component set."
+      }
+    },
+    "image": {
+      "pink": {
+        "$value": "#EE3889",
+        "$description": "Gradient stop and illustration only. Never sets type — 3.78:1 on white fails AA."
+      },
+      "sky": {
+        "$value": "#07B6BF",
+        "$description": "Gradient stop and illustration only. Never sets type — 2.48:1 on white fails AA."
+      },
+      "sky-deep": {
+        "$value": "#016F74",
+        "$description": "Accessible variant of sky for small text on white, and the end stop of Sky Depth."
+      }
+    },
+    "ground": {
+      "white": {
+        "$value": "#FFFFFF",
+        "$description": "Default page ground."
+      },
+      "tint": {
+        "$value": "#F2F5FD",
+        "$description": "Alternating section ground."
+      },
+      "grey": {
+        "$value": "#F2F2F2",
+        "$description": "Neutral section ground. Was the hero ground, when the washes needed a grey underlay to read. As of 2026-08-27 the washes carry their own depth via a transparent tail, and the hero composites over ground.white — so this is no longer required by hero-wash."
+      },
+      "hairline": {
+        "$value": "#E1E6F4",
+        "$description": "Borders, dividers, data chips. Replaces the stray pure-black chip border."
+      }
+    },
+    "chrome": {
+      "$description": "Added 2026-08-27. Colours the site's nav, footer and logo actually use, measured off rayobyte.com. This file was extracted from a PRODUCT page, so it had no dark ground and no neutral greys — every value here was previously off-palette. Recorded so the chrome stops failing palette audits, not because the palette was meant to be this wide.",
+      "wordmark": {
+        "$value": "#231F20",
+        "$description": "The logo lockup's wordmark. NOT ink.primary — the brand mark and body ink are deliberately different blacks. Comes from the supplied logo asset; do not 'correct' it to #050038."
+      },
+      "band": {
+        "$value": "#F4F2F6",
+        "$description": "Nav utility bar. A WARM grey, unlike ground.tint #F2F5FD which is cool. Inset to the content gutter with the bottom two corners rounded 15px."
+      },
+      "footer": {
+        "$value": "#282828",
+        "$description": "Footer ground. Charcoal, not ink.primary — the footer is not the same dark as the hero or CTA bands."
+      },
+      "muted": {
+        "$value": "#B4B4B4",
+        "$description": "Footer copyright line. Matches the file's text/disable paint style."
+      },
+      "chevron": {
+        "$value": "#999999",
+        "$description": "Dropdown chevrons in the main nav row."
+      },
+      "control-edge": {
+        "$value": "#5F5F5F",
+        "$description": "Border on the footer social icon boxes. Ships inside the YouTube and X SVGs — do not redraw the box, the asset already has it."
+      },
+      "surface-hover": {
+        "$value": "#F8F8F8",
+        "$description": "Fill the nav CTA inverts to on hover. See button.nav."
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "$value": "Plus Jakarta Sans",
+      "$description": "The entire brand. Variable weight, 400-700. No secondary face."
+    }
+  },
+  "typography": {
+    "$type": "typography",
+    "h1": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "60px",
+        "lineHeight": "72px",
+        "letterSpacing": "-0.6px"
+      },
+      "$description": "Display. Observed on the live site."
+    },
+    "h2": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "50px",
+        "lineHeight": "62.5px",
+        "letterSpacing": "0"
+      },
+      "$description": "Section heading. Observed on the live site."
+    },
+    "h3": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "32px",
+        "lineHeight": "42px",
+        "letterSpacing": "0"
+      },
+      "$description": "NEW — does not exist on the live site. Fills the 18-50px gap that causes off-ramp sizes during build."
+    },
+    "h4": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 600,
+        "fontSize": "24px",
+        "lineHeight": "32px",
+        "letterSpacing": "0"
+      },
+      "$description": "NEW — does not exist on the live site."
+    },
+    "card": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "18px",
+        "lineHeight": "36px",
+        "letterSpacing": "0"
+      },
+      "$description": "Card heading. Observed on the live site."
+    },
+    "body": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 500,
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "letterSpacing": "0"
+      },
+      "$description": "Running text. Keep the measure near 65 characters."
+    },
+    "button-primary": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "16px",
+        "lineHeight": "22.4px",
+        "letterSpacing": "0"
+      },
+      "$description": "Body CTA label. Set to 16px by decision 2026-09-08 — it was 20px/28, measured off rayobyte.com. Both body CTAs now share one label style, so primary and secondary read as a matched pair rather than a size hierarchy. This is a DELIBERATE divergence from the live site; if the pages are ever compared side by side, that is why. 22.4 is 1.4x, the site's ratio."
+    },
+    "button-secondary": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "16px",
+        "lineHeight": "22.4px",
+        "letterSpacing": "0"
+      },
+      "$description": "Outlined CTA label. 22.4 is 1.4x — the site's ratio, not a round number. Identical to button-primary as of 2026-09-08; the two roles are now distinguished by fill, border and the icon badge, not by type size."
+    },
+    "button-nav": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 600,
+        "fontSize": "15px",
+        "lineHeight": "22.5px",
+        "letterSpacing": "0.3px"
+      },
+      "$description": "Nav bar CTA label. The only button with tracking. Drops to weight 500 on hover — see button.nav-hover."
+    },
+    "caption": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 400,
+        "fontSize": "12px",
+        "lineHeight": "20px",
+        "letterSpacing": "0"
+      },
+      "$description": "Legal and footer text."
+    },
+    "overline": {
+      "$value": {
+        "fontFamily": "Plus Jakarta Sans",
+        "fontWeight": 700,
+        "fontSize": "12px",
+        "lineHeight": "20px",
+        "letterSpacing": "1.3px"
+      },
+      "$description": "Added 2026-08-27, closing the gap named in _rules.scale-gaps. All-caps section eyebrows. Caption size at weight 700 with tracking — flattening these to caption's 400 destroys the hierarchy, which is why the style was being improvised."
+    },
+    "chrome": {
+      "$description": "Added 2026-08-27, measured from rayobyte.com. Nav and footer type never existed in this file — it was extracted from a product page. These are what the site chrome actually uses, and they do not sit on the main ramp.",
+      "nav-link": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 700, "fontSize": "17px", "lineHeight": "27px", "letterSpacing": "0" },
+        "$description": "Main nav row: Products, Pricing, Education, Culture, Solutions."
+      },
+      "nav-utility": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 700, "fontSize": "14px", "lineHeight": "20px", "letterSpacing": "0" },
+        "$description": "Utility bar: Contact Us, Partners, Log in."
+      },
+      "footer-heading": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 500, "fontSize": "12px", "lineHeight": "18px", "letterSpacing": "0" },
+        "$description": "PRODUCTS / RESOURCES / OTHERS / HEADQUARTERS. Set in image.sky — legible there because the footer ground is dark (about 6.1:1), which is the one place sky may set type."
+      },
+      "footer-link": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 400, "fontSize": "14px", "lineHeight": "20px", "letterSpacing": "0" },
+        "$description": "Footer link lists. The single most-used style in the footer."
+      },
+      "footer-legal": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 400, "fontSize": "11px", "lineHeight": "16px", "letterSpacing": "0" },
+        "$description": "Privacy Policy / TOS and AUP / General SLA."
+      }
+    },
+    "mobile": {
+      "$description": "Added 2026-08-27, closing the second gap in _rules.scale-gaps. The main ramp is desktop-only; these are the 390px equivalents actually in the Figma mobile artboard. Same family and weights, proportionally smaller, tracking scaled with size.",
+      "h1": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 700, "fontSize": "36px", "lineHeight": "39.6px", "letterSpacing": "-0.36px" },
+        "$description": "Mobile display. Tracking is the desktop -0.6 scaled by 36/60."
+      },
+      "h2": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 700, "fontSize": "29px", "lineHeight": "34px", "letterSpacing": "0" },
+        "$description": "Mobile section heading, down from the 50px desktop h2."
+      },
+      "card": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 700, "fontSize": "18px", "lineHeight": "26px", "letterSpacing": "0" },
+        "$description": "Mobile card heading. Same size as desktop card but a much tighter 26 line-height — desktop's 36 is too airy in a narrow column."
+      },
+      "body": {
+        "$value": { "fontFamily": "Plus Jakarta Sans", "fontWeight": 500, "fontSize": "14.5px", "lineHeight": "22px", "letterSpacing": "0" },
+        "$description": "Mobile running text."
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "pill": {
+      "$value": "100px",
+      "$description": "Buttons and chips. Absorbs the stray 53px and 39px values."
+    },
+    "card": {
+      "$value": "10px",
+      "$description": "Cards, panels, modals. Absorbs the stray 12px value."
+    },
+    "tile": {
+      "$value": "16px",
+      "$description": "Data tiles and icon tiles. Note this is LARGER than radius.card (10px) despite the tile being the smaller object — that is deliberate, a small square needs more corner to read as soft. In use at 48px tiles on desktop and 44px on mobile."
+    }
+  },
+  "spacing": {
+    "$type": "dimension",
+    "button-y": { "$value": "12px", "$description": "Vertical padding, all button roles." },
+    "button-x": { "$value": "30px", "$description": "Horizontal padding, all button roles." },
+    "nav-button-y": { "$value": "8px", "$description": "Nav CTA is deliberately smaller." },
+    "nav-button-x": { "$value": "20px", "$description": "Nav CTA is deliberately smaller." }
+  },
+  "icon": {
+    "$description": "Added 2026-08-27. Feature icons are a glyph in a tile, not a bare glyph. Bare thin strokes on white read washed out at any brand colour, which is what the tile solves.",
+    "glyph-color": {
+      "$type": "color",
+      "$value": "#050038",
+      "$description": "ink.primary. The tile carries the brand colour; the glyph carries the contrast (19.75:1). Do not use action.nav #1B4DCA here — that blue is the nav CTA fill and nothing else."
+    },
+    "glyph-stroke": {
+      "$type": "dimension",
+      "$value": "2px",
+      "$description": "On a 24px viewBox. 1.7px and below goes weak once the glyph sits on a tinted tile."
+    },
+    "tile-size": {
+      "$type": "dimension",
+      "$value": "48px",
+      "$description": "44px on mobile. Also the threshold in _rules.gradient-forbidden-on — icons UNDER 48px take no gradient, so the wash belongs to the tile, never to the glyph."
+    },
+    "tile-fill": {
+      "$type": "other",
+      "$value": "ground.white + duotone-band",
+      "$description": "White base with the G-05 duotone over it, plus a 1px ground.hairline edge."
+    }
+  },
+  "button": {
+    "$description": "Added 2026-08-27, measured from rayobyte.com computed styles rather than derived. Three roles, all radius 100 (nav uses 39, which is the same thing at 38px tall). NO :active rule exists anywhere on the site, so every pressed state below is DERIVED, not observed — marked as such. Transition is 0.2s on all three.",
+    "primary": {
+      "$type": "other",
+      "$value": "solid cta, white label, white circular icon badge inset left",
+      "$description": "Body CTA. 16px/700 label, line-height 22.4 — see typography.button-primary; this was 20px on the live site and was reduced by decision 2026-09-08. Padding 6px 28px 6px 6px — asymmetric because the 52px white badge sits 6px from the left edge. Gap 14. Height 64, driven by the badge and padding, so it did NOT change when the label shrank. No shadow. Full-width variants pin the badge absolutely at 6,6 so the label stays optically centred; auto-layout cannot do both at once."
+    },
+    "primary-hover": {
+      "$type": "color",
+      "$value": "#81A786",
+      "$description": "OBSERVED but SUSPECT. Taken from .primary-blue-button-3.rispbutton.newcolor2.newbutton:hover. Four reasons to doubt it: it appears exactly ONCE in 368KB of CSS; it is in no palette; action.cta-hover #03A01A exists and is a proper same-hue derivation; and desaturating to sage makes the primary CTA LESS prominent on hover, which is backwards. It is also the fourth answer in a stack of conflicting rules on one element (#FF7A08 twice, then #050038, then this) — the signature of classes accumulating rather than a decision. Recorded because it is what production does. Recommend replacing with action.cta-hover."
+    },
+    "secondary": {
+      "$type": "other",
+      "$value": "white fill, 2px cta border, cta label, hard offset edge",
+      "$description": "16px/700 label, line-height 22.4. Padding 18px 36px, 2px border, height 62.4. Carries box-shadow #04B81E 3px 3px 0 0 — a HARD offset with zero blur and zero spread, which reads as a stacked second edge, not a shadow. Any blur at all destroys the effect. In Figma: fold the 2px border into the padding (20/38) because an INSIDE stroke does not add height the way a CSS border does, and clear clipsContent on every ancestor or the offset gets cropped."
+    },
+    "secondary-hover": {
+      "$type": "other",
+      "$value": "box-shadow: none",
+      "$description": "OBSERVED. The whole rule is .button:hover { box-shadow: none }. The offset simply vanishes and the button presses flat — fill, border and label do not move. Do not also shift the colour; the site does not."
+    },
+    "nav": {
+      "$type": "other",
+      "$value": "solid nav blue, white label, 1px same-colour border",
+      "$description": "Nav bar only. 158x38, padding 8px 16px, radius 39, 15px/600 label, letter-spacing 0.3, line-height 22.5. The 1px #1B4DCA border is invisible against its own fill but load-bearing: it is what stops the button resizing when the fill drops out on hover."
+    },
+    "nav-hover": {
+      "$type": "other",
+      "$value": "inverts to chrome.surface-hover with nav-blue label and border",
+      "$description": "OBSERVED. .rdf-button-1.newbutton:hover sets background #F8F8F8, colour #1B4DCA, border 1px #1B4DCA, font-weight 500. The button INVERTS rather than darkening — nothing like action.nav-hover. Note the weight drops 600 to 500; safe only because the button is a fixed 158x38 so nothing reflows."
+    }
+  },
+  "gradient": {
+    "$type": "gradient",
+    "$description": "Figma Variables cannot hold gradients — create these as Fill Styles. Alpha is baked into the 8-digit hex. Figma uses handle positions, not CSS degrees: build visually and compare against the rendered swatch.",
+    "hero-wash": {
+      "$value": [
+        { "color": "#07B6BF17", "position": 0 },
+        { "color": "#07B6BF00", "position": 0.61 },
+        { "color": "#07B6BF00", "position": 1 }
+      ],
+      "$description": "G-01. LIVE, revised 2026-08-27. CSS: linear-gradient(315deg, rgba(7,182,191,.09), transparent 61%) over #FFFFFF. Full-bleed hero. Sky tint enters bottom-right and resolves to the page ground by 61% so content sits on a calm field. REVISION: the tail stops used to be opaque #F2F2F2. That baked the ground into the gradient — the wash could only ever sit on grey, and lowering its layer opacity greyed the entire hero instead of thinning the tint, because the opaque tail faded toward the ground rather than away from it. The tail is now transparent, so one alpha is the only control and the wash composites over any ground. Alpha settled at 9% — the transparent tail makes the tint read stronger than the old baked-in version at the same number, so 9% here is not a weaker hero than the original 15% over grey, it is a comparable one. 9% is now the single wash level across the system: hero, body bands and icon tiles all sit here, and only duotone-tint (imagery, 18%) sits above it."
+    },
+    "duotone-tint": {
+      "$value": [
+        { "color": "#07B6BF2E", "position": 0 },
+        { "color": "#EE38892E", "position": 1 }
+      ],
+      "$description": "G-02. LIVE. CSS: linear-gradient(135deg, rgba(7,182,191,.18), rgba(238,56,137,.18)). Fully transparent — tints whatever sits behind it. Imagery blocks, testimonial panels, media cards. Scope narrowed 2026-08-27: 18% is the IMAGERY level. For full-bleed body sections use duotone-band (G-05) instead — 18% across a whole band overpowers the content sitting on it."
+    },
+    "duotone-band": {
+      "$value": [
+        { "color": "#07B6BF17", "position": 0 },
+        { "color": "#EE388917", "position": 1 }
+      ],
+      "$description": "G-05. Added 2026-08-27. CSS: linear-gradient(90deg, rgba(7,182,191,.09), rgba(238,56,137,.09)). Figma gradientTransform [[1,0,0],[0,1,0]] — sky at the left edge, pink at the right, y ignored. Same two stops as duotone-tint at half the alpha, but HORIZONTAL rather than duotone-tint's 135deg: a band is much wider than it is tall, so a diagonal compresses the whole sky-to-pink transition into one corner, while a horizontal run spreads it across the full measure. Chosen on review 2026-08-27. THE body-section wash: any full-bleed band that is not the hero uses this and nothing else. Composites over ground.tint so a band still reads as distinct from the white sections above and below — over ground.white it disappears. Also the icon-tile wash. The hero is the one exception and keeps hero-wash (G-01)."
+    },
+    "pink-wash": {
+      "$value": [
+        { "color": "#EE388917", "position": 0 },
+        { "color": "#EE388900", "position": 0.61 },
+        { "color": "#EE388900", "position": 1 }
+      ],
+      "$description": "G-03. CSS: linear-gradient(315deg, rgba(238,56,137,.09), transparent 61%) over #FFFFFF. Mirror of hero-wash for a second hero variant — THE feature-landing-page hero background, so a campaign or product page reads differently from the main page without leaving the palette. Revised 2026-08-27: transparent tail like hero-wash, alpha 9%. HISTORY, because this number moved three times in one session: it started at 12%, was raised to 13% to match hero-wash, was pulled back to 9% on sight — at which point hero-wash itself was lowered to 9% too. So the two heroes are now EQUAL at 9%, and this file's original principle (pink sits below sky because it carries more visual weight at equal alpha) is currently NOT expressed in the values. That is an open question, not a settled decision: either pink drops to roughly 6-7% to restore the differential, or the principle is retired because at 9% both washes are faint enough that it no longer bites. Decide before adding a third wash. Pick one per page: a hero takes hero-wash or pink-wash, never both."
+    },
+    "deep-wash": {
+      "$value": [
+        { "color": "#07B6BF47", "position": 0 },
+        { "color": "#05003800", "position": 0.61 },
+        { "color": "#05003800", "position": 1 }
+      ],
+      "$description": "G-04. PROPOSED, not yet on the site. Same geometry inverted onto #050038 for footers and dark bands. Alpha rises to 28% because a tint works harder over a dark ground."
+    }
+  },
+  "_rules": {
+    "$type": "other",
+    "gradient-alpha-ceiling": {
+      "$value": "25%",
+      "$description": "Pink and sky above roughly 25% alpha start showing the muddy midpoint (#7B77A4 at 20% saturation when fully opaque). The low alpha is the mechanism, not a style preference."
+    },
+    "gradient-forbidden-on": {
+      "$value": "buttons, badges, form controls, text fills, icons under 48px",
+      "$description": "Actions are flat. Never fill an interactive element with a gradient."
+    },
+    "cta-green-is-a-fill-never-type": {
+      "$value": "#04B81E sets fills only; for affirmative TEXT use #016F74",
+      "$description": "Added 2026-08-27. action.cta already warns that white ON the green fails. The reverse also fails and is easier to miss: the green AS type is the same 2.66:1, on white and on any near-white tint. So a table cell or list item reading 'None' or 'Yes' must not be green — use image.sky-deep #016F74, which is the accessible member of the family. Applies equally to #1EB84B if it resurfaces from old files; it is retired."
+    },
+    "gradient-construction": {
+      "$value": "transparent tail, alpha carried by the layer",
+      "$description": "Added 2026-08-27. A wash's far stops must be TRANSPARENT, never an opaque ground colour. Baking the ground in (the pre-revision hero-wash ended on opaque #F2F2F2) welds the wash to one background and breaks the opacity control — dimming the layer fades toward the baked colour instead of toward nothing, so the whole surface greys out. With a transparent tail the layer opacity is the single honest control and the wash composites over any ground. In Figma this means one gradient paint above one solid paint, adjusting the gradient's own opacity."
+    },
+    "scale-gaps": {
+      "$value": "monospace exception; type ramp does not yet cover the whole design",
+      "$description": "Added 2026-08-27, updated the same day. TWO ORIGINAL GAPS ARE NOW CLOSED: typography.mobile carries the 390px ramp, and typography.overline covers all-caps eyebrows. ONE REMAINS: font.family says 'no secondary face', but code samples need a monospace or shell syntax loses its column alignment — JetBrains Mono Regular is in use for exactly two blocks and is a deliberate exception. STILL OUTSTANDING: an audit of the Figma artboards on 2026-08-27 found 56 distinct type styles against a ramp of 8. Colour is fully reconciled (every value in the design maps to a token); type is not. Most of the excess is one-off sizes — 14.5, 15.5, 13.5, 12.5 — introduced while matching sections by eye. They are not wrong, they are just unnamed. Before this ships, either fold them onto the ramp or promote the ones that earn a name."
+    },
+    "measure-production-do-not-derive": {
+      "$value": "read the live computed style before building any component",
+      "$description": "Added 2026-08-27, learned the hard way. This file describes intent; the site does not always follow it. Three examples found in one afternoon: the nav CTA inverts on hover instead of using nav-hover; the primary CTA hovers to an off-palette sage instead of cta-hover; and the secondary CTA's entire hover is box-shadow:none, which no token describes. Two practical warnings. (1) Query the WHOLE computed style, not a hand-picked subset — box-shadow was missed twice because it was not in the list of properties being asked for. (2) Where several class-combination rules target one element, work out which actually wins by specificity; the nav CTA matches four different :hover rules and only the most specific applies."
+    },
+    "figma-build-traps": {
+      "$value": "inside strokes, clipped shadows, node-bounds screenshots",
+      "$description": "Added 2026-08-27. Three Figma-specific mistakes that cost real time on this build. (1) A CSS border adds to the element's height; a Figma INSIDE stroke does not — fold the border width into the padding or the box comes out short. (2) An offset shadow is drawn OUTSIDE the node's bounds, so any ancestor with clipsContent will crop it; clear it up the whole chain. (3) node.screenshot() captures node bounds only, so it will not show you anything drawn outside them — screenshot the parent when checking shadows."
+    },
+    "retired": {
+      "$value": "#A358FC, #FFBE38, #FF5A3C, #FF7A08, #1EB84B, #18B82A",
+      "$description": "Removed from the palette 2026-08-26. The first four by decision; #1EB84B and #18B82A because #04B81E was promoted to the CTA token. Search and replace all six."
+    }
+  }
+}

@@ -1,0 +1,252 @@
+/* ---------------------------------------------------------------------------
+   Three button roles, from the `button` group in rayobyte.tokens.json.
+
+   Those specs were MEASURED off rayobyte.com computed styles, not derived, and
+   they disagree with the generic tokens in three places. Per
+   _rules.measure-production-do-not-derive the measured values win; the
+   divergences are recorded at each site below so they are not silently lost:
+
+     1. typography.button says 16px/700/21 and claims it covers "all three
+        button roles". No role actually uses it: primary is 20/28,
+        secondary 16/22.4, nav 15/600/22.5. The token is aspirational.
+     2. spacing.button-y/x (12/30) matches neither primary (6 28 6 6) nor
+        secondary (18 36).
+     3. spacing.nav-button-x is 20px; the measured nav padding is 16px.
+
+   Transition is 0.2s on all three (token file, `button` group description).
+   No :active rule exists anywhere on the site, so every pressed state here is
+   DERIVED, not observed — marked as such.
+--------------------------------------------------------------------------- */
+
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  border-radius: var(--radius-pill);
+  /* 0.2s on all three roles, per the token file's `button` group. */
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.base:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* === PRIMARY ============================================================ */
+/* Solid CTA green with a white circular badge inset left.
+   Padding is asymmetric (6px 28px 6px 6px) because the 52px badge sits 6px
+   from the left edge; the right padding does the optical balancing.
+   Height 6 + 52 + 6 = 64. No shadow. */
+
+.primary {
+  position: relative;
+  gap: 14px;
+  height: 64px;
+  padding: 6px 28px 6px 6px;
+  background: var(--color-action-cta);
+
+  /* ---------------------------------------------------------------------
+     ⚠ KNOWN AA FAILURE — deliberate, decided, not an oversight.
+
+     The Figma artboard sets this label WHITE (`text-white` on `bg-#04b81e`),
+     and the design was chosen as the source of truth for it.
+
+     The token file says the opposite in as many words:
+       "Label MUST be #050038 (7.41:1). White on this green is 2.66:1 and
+        fails AA — do not use white."
+
+     White on #04B81E really is 2.66:1, so this ships the page's most
+     important control below AA. Raised before implementing; the call was to
+     match the design. Recorded here so nobody "fixes" it by accident and so
+     the debt is visible.
+
+     The accessible alternative is one line — swap the declaration below for
+     `color: var(--color-ink-primary)`, which is 7.41:1 on this green.
+  --------------------------------------------------------------------- */
+  color: var(--color-ground-white);
+  /* 16px by instruction, down from the 20px measured off production.
+
+     This lands on typography.button (16px / 700 / 21) — the token that
+     previously described all three roles while no role actually used it. The
+     primary now does, so the label sizes match the secondary and the token is
+     real rather than aspirational.
+
+     Geometry is unaffected: the button's 64px height comes from the 52px badge
+     plus 6px above and below, not from the label, so only the width shrinks. */
+  font-size: var(--type-button-size);
+  line-height: var(--type-button-line);
+  font-weight: var(--type-button-weight);
+}
+
+/* ---------------------------------------------------------------------------
+   HOVER — read from the component set, not invented.
+
+   Button / Primary, State=Hover (28004:26) changes ONE thing: the fill. Same
+   padding, same 52px badge, same white label, no lift and no motion of any
+   kind. An earlier pass here added a 1px lift and a 3px arrow nudge to make
+   the state more legible; that is not in the design and has been removed.
+
+   The fill is the artboard's sage #81A786 (button.primary-hover), confirmed
+   against the rendered component set. This was decided in favour of the design
+   after first shipping action.cta-hover #03A01A.
+
+   Both the token file and Figma's own component description dissent from this
+   value, so the disagreement is recorded rather than lost:
+
+     "Hover fill #81A786 is taken verbatim from rayobyte.com [...] that value
+      appears exactly once in the whole stylesheet, is not in the token
+      palette, and the token file specifies action.cta-hover #03A01A instead —
+      treat it as unverified."
+
+   The argument against it is that desaturating to sage makes a primary CTA
+   LESS prominent on hover, which is backwards as an affordance. The argument
+   for it is that it is what the design and production both ship, and it is
+   far more visible than #03A01A — which is only about a 12% luminance step on
+   an already-saturated green and reads as almost no feedback at all.
+
+   To revert to the token value, this one line is the whole change:
+       background: var(--color-action-cta-hover);
+--------------------------------------------------------------------------- */
+.primary:hover:not(:disabled) {
+  background: var(--color-action-cta-hover-shipped);
+}
+
+/* Button / Primary, State=Pressed (28004:38) — bg #038A17, nothing else.
+   DERIVED in the design too: no :active rule exists on the production site. */
+.primary:active:not(:disabled) {
+  background: var(--color-action-cta-press);
+}
+
+.badge {
+  flex: none;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-pill);
+  background: var(--color-ground-white);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* The exported glyph is 24px inside the 52px badge — both dimensions are
+   explicit so the leaf keeps its designed geometry regardless of the badge. */
+.badgeGlyph {
+  width: 24px;
+  height: 24px;
+}
+
+/* Full-width variant. Auto-layout cannot centre the label and inset the badge
+   at once, so the badge is pinned absolutely at 6,6 and the label centres in
+   the full width. */
+.fullWidth {
+  display: flex;
+  width: 100%;
+  padding: 6px 28px;
+}
+
+.fullWidth .badge {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+}
+
+/* === SECONDARY ========================================================== */
+/* White fill, 2px CTA border, CTA label, and a HARD offset edge.
+   Height 18 + 22.4 + 18 + (2 x 2px border) = 62.4. */
+
+.secondary {
+  height: 62.4px;
+  padding: 18px 36px;
+  background: var(--color-ground-white);
+  border: 2px solid var(--color-action-cta);
+  font-size: 16px;
+  line-height: 22.4px;
+  font-weight: 700;
+
+  /* ---------------------------------------------------------------------
+     ⚠ ACCESSIBILITY CONFLICT — flagged, not silently resolved.
+
+     button.secondary specifies a "cta label", i.e. #04B81E as TYPE. But
+     _rules.cta-green-is-a-fill-never-type states #04B81E sets fills only,
+     because as type it is 2.66:1 on white and fails AA — and a 16px/700
+     label is not large text, so it fails the 3:1 large-text threshold too.
+
+     The measured production value is shipped here to match the design.
+     The accessible fix is one line — swap to ink-primary (19.75:1), which
+     keeps the green as border + offset edge where it is a fill and legal:
+
+         color: var(--color-ink-primary);
+
+     Raised for a decision rather than changed unilaterally.
+  --------------------------------------------------------------------- */
+  color: var(--color-action-cta);
+
+  /* A HARD offset with zero blur and zero spread. This reads as a stacked
+     second edge, not a shadow. ANY blur destroys the effect. */
+  box-shadow: 3px 3px 0 0 var(--color-action-cta);
+}
+
+/* OBSERVED. The whole production rule is `.button:hover { box-shadow: none }`.
+   The offset simply vanishes and the button presses flat — fill, border and
+   label do not move. Do not also shift the colour; the site does not. */
+.secondary:hover:not(:disabled) {
+  box-shadow: none;
+}
+
+/* Button / Secondary, State=Pressed (28006:18). Keeps the flat (shadow-less)
+   state and darkens BORDER AND LABEL to action.cta-press; the fill stays
+   white. An earlier pass greyed the fill instead — that is not the design. */
+.secondary:active:not(:disabled) {
+  box-shadow: none;
+  background: var(--color-ground-white);
+  border-color: var(--color-action-cta-press);
+  color: var(--color-action-cta-press);
+}
+
+/* === NAV ================================================================ */
+/* Nav bar only. Fixed 158x38.
+   The 1px same-colour border is invisible against its own fill but
+   load-bearing: it is what stops the button resizing when the fill drops out
+   on hover. Radius 39 is the token file's value and is identical to the pill
+   radius at this height. */
+
+.nav {
+  width: 158px;
+  height: 38px;
+  padding: 8px 16px;
+  background: var(--color-action-nav);
+  color: var(--color-ground-white);
+  border: 1px solid var(--color-action-nav);
+  border-radius: 39px;
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* OBSERVED. The button INVERTS rather than darkening — nothing like
+   action.nav-hover (#1741AC), which appears nowhere in the production
+   stylesheet. The weight drops 600 -> 500; safe only because the button is a
+   fixed 158x38 so nothing reflows. */
+.nav:hover:not(:disabled) {
+  background: var(--color-chrome-surface-hover);
+  color: var(--color-action-nav);
+  border-color: var(--color-action-nav);
+  font-weight: 500;
+}
+
+/* Button / Nav, State=Pressed (28006:25). The site defines no :active, so this
+   is derived in the design too — but it DEEPENS THE HOVER INVERSION rather
+   than returning to a solid fill: the #F8F8F8 ground stays, and border and
+   label go to action.nav-press. An earlier pass flipped it back to a solid
+   blue fill with a white label, which is the opposite of the design. */
+.nav:active:not(:disabled) {
+  background: var(--color-chrome-surface-hover);
+  color: var(--color-action-nav-press);
+  border-color: var(--color-action-nav-press);
+  font-weight: 500;
+}

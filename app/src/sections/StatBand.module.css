@@ -1,0 +1,62 @@
+/* Stat band (27883:14). WHITE ground with a single bottom hairline — not a
+   washed band and not a bordered card grid. Cells are divided by left borders,
+   value 32px/42, label caption on white where ink.secondary is legal. */
+
+.band {
+  background: var(--color-ground-white);
+  border-bottom: 1px solid var(--color-ground-hairline);
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+}
+
+.cell {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 38px 24px;
+  border-left: 1px solid var(--color-ground-hairline);
+}
+
+.cell:first-child {
+  padding-left: 0;
+  border-left: none;
+}
+
+.value {
+  font-size: 32px;
+  line-height: 42px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+  margin: 0;
+}
+
+.label {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-caption-weight);
+  color: var(--color-ink-secondary);
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-wrap: wrap;
+  }
+  .cell {
+    flex: 1 1 50%;
+    min-width: 50%;
+    padding: 24px 16px;
+  }
+  .cell:nth-child(odd) {
+    padding-left: 0;
+    border-left: none;
+  }
+  .value {
+    font-size: 26px;
+    line-height: 34px;
+  }
+}

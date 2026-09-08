@@ -1,0 +1,203 @@
+/* ---------------------------------------------------------------------------
+   Reset + typographic base. Depends on tokens.css.
+--------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-ground-white);
+  color: var(--color-ink-primary);
+  font-family: var(--font-family);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  font-weight: var(--type-body-weight);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-action-nav);
+  outline-offset: 2px;
+}
+
+/* --- type ramp --------------------------------------------------------- */
+/* The ramp is desktop-only by design (_rules.scale-gaps). Mobile keeps the
+   same family and weight at proportionally smaller sizes — the reductions
+   below are the only place that happens, so there is one thing to change if
+   a real mobile ramp is ever added to the token file. */
+
+.t-h1 {
+  font-size: var(--type-h1-size);
+  line-height: var(--type-h1-line);
+  letter-spacing: var(--type-h1-tracking);
+  font-weight: var(--type-h1-weight);
+}
+
+.t-h2 {
+  font-size: var(--type-h2-size);
+  line-height: var(--type-h2-line);
+  letter-spacing: var(--type-h2-tracking);
+  font-weight: var(--type-h2-weight);
+}
+
+.t-h3 {
+  font-size: var(--type-h3-size);
+  line-height: var(--type-h3-line);
+  font-weight: var(--type-h3-weight);
+}
+
+.t-h4 {
+  font-size: var(--type-h4-size);
+  line-height: var(--type-h4-line);
+  font-weight: var(--type-h4-weight);
+}
+
+.t-card {
+  font-size: var(--type-card-size);
+  line-height: var(--type-card-line);
+  font-weight: var(--type-card-weight);
+}
+
+.t-body {
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  font-weight: var(--type-body-weight);
+}
+
+.t-caption {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-caption-weight);
+}
+
+/* There is no overline/eyebrow style in the token file, so all-caps labels use
+   caption size at weight 700 (_rules.scale-gaps records this decision). */
+.t-eyebrow {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .t-h1 {
+    font-size: 38px;
+    line-height: 46px;
+    letter-spacing: -0.4px;
+  }
+  .t-h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  .t-h3 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .t-h4 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .t-card {
+    font-size: 17px;
+    line-height: 28px;
+  }
+}
+
+/* --- layout helpers ---------------------------------------------------- */
+
+/* Body-section container — 120px gutters, per the artboard. */
+.container {
+  width: 100%;
+  max-width: var(--layout-page-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter-body);
+}
+
+/* Nav and footer only. The artboard insets the chrome 86px, not 120 — see the
+   layout note in tokens.css. */
+.container-chrome {
+  width: 100%;
+  max-width: var(--layout-page-max);
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter-chrome);
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding-inline: var(--layout-gutter-body-mobile);
+  }
+  .container-chrome {
+    padding-inline: var(--layout-gutter-chrome-mobile);
+  }
+}
+
+/* Any section that carries an offset-shadow child (the secondary button) must
+   not clip — the shadow is drawn outside the node's bounds. This mirrors the
+   Figma trap: clear clipsContent up the whole ancestor chain. */
+section {
+  overflow: visible;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}

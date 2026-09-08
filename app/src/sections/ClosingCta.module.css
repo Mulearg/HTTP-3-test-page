@@ -1,0 +1,62 @@
+/* Closing CTA (27888:14). A DARK ink.primary band — not the light duotone band
+   an earlier pass used. Copy left at 640, buttons right. Padding 76. */
+
+.wrap {
+  background: var(--color-ink-primary);
+  padding-block: 76px;
+  overflow: visible;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.copy {
+  flex: none;
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heading {
+  color: var(--color-ground-white);
+}
+
+.body {
+  color: rgba(255, 255, 255, 0.66);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (max-width: 1180px) {
+  .inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+  .copy {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    padding-block: 56px;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .actions > * {
+    width: 100%;
+  }
+}

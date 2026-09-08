@@ -1,0 +1,121 @@
+/* ---------------------------------------------------------------------------
+   Shared table styling. Comparison (27884:16) and Protocols (27966:19) use the
+   same shell, so this is one stylesheet rather than two near-copies.
+
+   The artboard's header is a DARK ink.primary bar with rgba-white labels — not
+   the light tinted header an earlier pass guessed. That also resolves the
+   contrast problem the light version had.
+--------------------------------------------------------------------------- */
+
+.wrap {
+  overflow-x: auto;
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  background: var(--color-ground-white);
+}
+
+.table {
+  min-width: 720px;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 20px 26px;
+  vertical-align: top;
+}
+
+.table thead th {
+  background: var(--color-ink-primary);
+  padding-block: 18px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.62);
+  white-space: nowrap;
+}
+
+/* The column the page is about is called out in sky even in the header. */
+.headEmphasis {
+  color: var(--color-image-sky) !important;
+}
+
+.table tbody tr {
+  border-bottom: 1px solid var(--color-ground-hairline);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.table tbody th {
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+.rowLabel {
+  font-weight: 500;
+  color: var(--color-ink-primary);
+}
+
+.note {
+  color: var(--color-ink-secondary);
+}
+
+/* The HTTP/3 column carries a faint sky ground down its whole length. */
+.colEmphasis {
+  background: rgba(7, 182, 191, 0.06);
+}
+
+/* Affirmative cell text is sky-deep — never the CTA green, which is 2.66:1 as
+   type. _rules.cta-green-is-a-fill-never-type names this exact case, and the
+   artboard honours it. */
+.affirmative {
+  color: var(--color-image-sky-deep);
+}
+
+.protocolEmphasis {
+  color: var(--color-image-sky-deep);
+  font-weight: 700;
+}
+
+/* Placeholder / code chip — a real design element (27884:73, 27966:71), not a
+   note to self. */
+.chipRow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-top: 0;
+}
+
+/* Goes through the scoped property, not ink.secondary directly: this footnote
+   sits on the banded Comparison section, where #757575 is 4.22:1 and fails. */
+.chipText {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-text-support);
+}
+
+.chip {
+  background: var(--color-ground-hairline);
+  border-radius: var(--radius-pill);
+  padding: 1px 7px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ink-primary);
+}
+
+.chipCode {
+  padding: 2px 9px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.chipTextLg {
+  font-size: 13.5px;
+}

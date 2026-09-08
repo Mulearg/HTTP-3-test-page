@@ -1,0 +1,45 @@
+/* Why HTTP3 (27883:27). Centred head, three equal cards.
+   This section is 92px top and bottom where most are 88 — set by overriding
+   the rhythm property so Section's own padding-block picks it up rather than
+   nesting a second padded box. */
+
+.section {
+  --space-section-y: 92px;
+}
+
+.grid {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.card {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Body copy is ink.primary here — the artboard sets these cards in full ink,
+   not the muted supporting colour. */
+.body {
+  color: var(--color-ink-primary);
+}
+
+@media (max-width: 900px) {
+  .section {
+    --space-section-y: var(--space-section-y-mobile);
+  }
+  .grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .card {
+    padding: 22px;
+  }
+}

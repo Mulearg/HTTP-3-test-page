@@ -1,0 +1,72 @@
+/* ---------------------------------------------------------------------------
+   Code block (27885:32). One of exactly TWO places JetBrains Mono is used in
+   body copy — font.family says "no secondary face", and _rules.scale-gaps
+   records the exception for code samples.
+
+   (The artboard uses the mono face in a THIRD place: the entry-point hostnames
+   in Where it runs. Either the rule's count is stale or those should be Plus
+   Jakarta Sans — flagged, not silently resolved.)
+
+   Contrary to an earlier assumption, the design DOES define a syntax palette,
+   so this is not invented:
+     call / function   image.sky   #07B6BF
+     string literal    image.pink  #EE3889
+     comment           white @ 36%
+     everything else   white @ 88%
+   Both hues set type here on a dark ground, where they pass — the "never sets
+   type" warning on them is scoped to light grounds.
+--------------------------------------------------------------------------- */
+
+.block {
+  background: var(--color-ink-primary);
+  border-radius: var(--radius-card);
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* The three window dots, exported from the artboard rather than redrawn. */
+.dots {
+  width: 47px;
+  height: 11px;
+}
+
+.pre {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.code {
+  font-family: var(--font-family-mono);
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 1.92;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: pre;
+  display: block;
+}
+
+.comment {
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.fn {
+  color: var(--color-image-sky);
+}
+
+.str {
+  color: var(--color-image-pink);
+}
+
+@media (max-width: 900px) {
+  .block {
+    padding: 20px;
+  }
+  .code {
+    font-size: 12.5px;
+  }
+}

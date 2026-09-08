@@ -1,0 +1,57 @@
+/* How you connect (27885:14). Copy column 470 wide, gap 72, code block fills
+   the rest. Replaces the old "It is a flag, not a migration" section, which
+   was not merely imprecise but false — the docs say curl cannot drive HTTP/3
+   over SOCKS5 UDP at all. */
+
+.inner {
+  display: flex;
+  gap: 72px;
+  align-items: center;
+}
+
+.copy {
+  flex: none;
+  width: 470px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.body {
+  color: var(--color-ink-primary);
+}
+
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.rule {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line);
+  font-weight: 500;
+}
+
+/* The exported check glyph is CTA green — legal, because a glyph is a fill,
+   not type. The label beside it is ink. */
+.check {
+  flex: none;
+  width: 19px;
+  height: 19px;
+}
+
+@media (max-width: 1180px) {
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 32px;
+  }
+  .copy {
+    width: 100%;
+  }
+}

@@ -1,0 +1,176 @@
+/* Where it runs (27967:14). Centred head, two equal panels, dark callout.
+   Availability is a LIST, not the checkmark matrix an earlier pass built. */
+
+.row {
+  display: flex;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.panel {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panelTitle {
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-ink-secondary);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.protocol {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+/* "Residential only" is sky-deep — the affirmative colour, never CTA green. */
+.scopeOnly {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-image-sky-deep);
+  white-space: nowrap;
+}
+
+.scopeAll {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-ink-secondary);
+  white-space: nowrap;
+}
+
+.note {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+  color: var(--color-ink-secondary);
+  max-width: 420px;
+}
+
+/* Entry points */
+.epList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.epRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.epName {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.epRegion {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+/* NOTE: the artboard sets hostnames in JetBrains Mono, which is a THIRD use of
+   the mono face where _rules.scale-gaps licenses only two code blocks.
+   Reproduced as designed and flagged rather than silently changed. */
+.epHost {
+  font-family: var(--font-family-mono);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: var(--color-ink-secondary);
+}
+
+.chipLive {
+  flex: none;
+  background: rgba(7, 182, 191, 0.12);
+  color: var(--color-image-sky-deep);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chipSoon {
+  flex: none;
+  background: var(--color-ground-hairline);
+  color: var(--color-ink-secondary);
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* The callout is a DARK ink.primary panel, not the light tint an earlier pass
+   used. */
+.callout {
+  margin-top: 40px;
+  background: var(--color-ink-primary);
+  border-radius: var(--radius-card);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.calloutLead {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--color-ground-white);
+}
+
+.calloutBody {
+  flex: 1 1 0;
+  min-width: 240px;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+@media (max-width: 900px) {
+  .row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .panel {
+    padding: 22px;
+  }
+  .callout {
+    padding: 18px;
+  }
+}

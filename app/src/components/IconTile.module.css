@@ -1,0 +1,51 @@
+/* ---------------------------------------------------------------------------
+   The glyph-in-a-tile pattern (icon group in rayobyte.tokens.json, and
+   27914:14/15/16 on the artboard).
+
+   Feature icons are a glyph in a TILE, not a bare glyph: bare thin strokes on
+   white read washed out at any brand colour, which is what the tile solves.
+   The tile carries the brand colour, the glyph carries the contrast.
+
+   48px tile = white base + the G-05 duotone band + a 1px hairline edge.
+   48px is exactly the threshold in _rules.gradient-forbidden-on, so the wash
+   belongs to the tile and never to the glyph.
+--------------------------------------------------------------------------- */
+
+.tile {
+  flex: none;
+  width: var(--icon-tile-size);
+  height: var(--icon-tile-size);
+  border-radius: var(--radius-tile);
+  border: 1px solid var(--color-ground-hairline);
+  background-image: var(--gradient-duotone-band);
+  background-color: var(--color-ground-white);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* The exported glyph is 30px inside the 48px tile. Both dimensions explicit so
+   the leaf keeps its designed geometry. */
+.glyph {
+  width: 30px;
+  height: 30px;
+}
+
+/* Traps use the same tile with a numeral instead of a glyph. */
+.numeral {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--icon-glyph-color);
+}
+
+@media (max-width: 900px) {
+  .tile {
+    width: 44px;
+    height: 44px;
+  }
+  .glyph {
+    width: 26px;
+    height: 26px;
+  }
+}

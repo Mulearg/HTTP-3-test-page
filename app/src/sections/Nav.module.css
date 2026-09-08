@@ -1,0 +1,221 @@
+/* ---------------------------------------------------------------------------
+   Nav (27949:14). Insets 86px — the chrome gutter, not the 120px body one.
+
+   The utility band is chrome.band #F4F2F6, a WARM grey deliberately unlike
+   ground.tint #F2F5FD. It fills the chrome gutter with only the BOTTOM TWO
+   corners rounded 15px, and its content is right-aligned.
+--------------------------------------------------------------------------- */
+
+.wrap {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--color-ground-white);
+}
+
+.band {
+  background: var(--color-chrome-band);
+  border-radius: 0 0 15px 15px;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-inline: 24px 35px;
+}
+
+/* 14px bold ink.primary — NOT ink.secondary, which is 4.14:1 on this warm grey
+   and fails AA. The artboard uses ink.primary here too. */
+.bandLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+  transition: color 0.2s;
+}
+
+.bandLink:hover {
+  color: var(--color-image-sky-deep);
+}
+
+/* "Log in" is the one utility item the design sets in nav blue. */
+.bandLogin {
+  gap: 8px;
+  color: var(--color-action-nav);
+}
+
+.bandLogin:hover {
+  color: var(--color-action-nav);
+  text-decoration: underline;
+}
+
+.sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(5, 0, 56, 0.25);
+  flex: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 21px;
+  gap: 24px;
+}
+
+/* The lockup renders at 157 x 29.606 in the artboard, not the asset's native
+   175 x 33. Both dimensions explicit so the leaf keeps its aspect ratio. */
+.logo {
+  flex: none;
+  width: 157px;
+  height: 29.606px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+  line-height: 27px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: var(--color-image-sky-deep);
+}
+
+.chevron {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.chevronSm {
+  flex: none;
+  width: 13px;
+  height: 13px;
+}
+
+.avatar {
+  flex: none;
+  width: 22px;
+  height: 22px;
+}
+
+.toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+}
+
+@media (max-width: 1100px) {
+  .links {
+    gap: 24px;
+  }
+  .link {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 900px) {
+  .band,
+  .links,
+  .navCta {
+    display: none;
+  }
+  .toggle {
+    display: inline-flex;
+  }
+  .row {
+    padding-block: 12px;
+  }
+  .panel {
+    border-top: 1px solid var(--color-ground-hairline);
+    padding: 12px 0 20px;
+    display: grid;
+    gap: 4px;
+  }
+  .panel .link {
+    padding-block: 10px;
+  }
+  .panelCta {
+    margin-top: 12px;
+  }
+}
+
+/* --- mega-menu host ------------------------------------------------------ */
+/* The panels span the full nav width and drop from the bottom edge of this
+   row, matching the live site — so the positioning context is the row, not
+   each individual toggle. */
+
+.rowHost {
+  position: relative;
+}
+
+/* --- mobile menu groups -------------------------------------------------- */
+
+.mobileGroup {
+  border-bottom: 1px solid var(--color-ground-hairline);
+}
+
+.mobileSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+  cursor: pointer;
+  list-style: none;
+}
+
+.mobileSummary::-webkit-details-marker {
+  display: none;
+}
+
+.mobileGroup[open] .chevron {
+  transform: rotate(180deg);
+}
+
+.mobileItems {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.mobileItem {
+  padding: 8px 0 8px 12px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-ink-secondary);
+}
+
+.mobileItem:hover {
+  color: var(--color-ink-primary);
+}

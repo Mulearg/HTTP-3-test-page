@@ -1,0 +1,23 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 1440, "h": 4700, "title": "Desktop — 1440" },
+    { "file": "Mobile.dc.html", "x": 1600, "y": 0, "w": 390, "h": 4850, "title": "Mobile — 390" }
+  ],
+  "annotations": [
+    {
+      "id": "fill-in",
+      "x": 0,
+      "y": -180,
+      "w": 460,
+      "text": "One thing to fill in before this ships:\nthe [YOUR BENCHMARK NUMBERS] line under the protocol table.\n\nEverything else is real — network stats, prices and the ScraperAPI quote come from rayobyte.com; the protocol claims are QUIC/HTTP-3 behaviour, not marketing."
+    },
+    {
+      "id": "endpoint-note",
+      "x": 520,
+      "y": -180,
+      "w": 460,
+      "text": "The curl block uses [YOUR ENDPOINT]:[PORT] rather than a guessed gateway host — swap in the real residential endpoint."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

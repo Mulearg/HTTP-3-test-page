@@ -1,0 +1,111 @@
+/* ---------------------------------------------------------------------------
+   Hero (27882:14).
+
+   Ground is hero-wash (G-01) over ground.white. ground.grey is NOT an underlay:
+   the wash carries its own depth via a transparent tail, so it composites over
+   white and one alpha is the only control.
+
+   The hero takes hero-wash OR pink-wash, never both. This is the main product
+   page, so it takes hero-wash; pink-wash is the feature/campaign variant.
+
+   Padding is 88 top / 76 bottom, copy column 620 wide, gap 72 to the diagram.
+--------------------------------------------------------------------------- */
+
+.hero {
+  background-image: var(--gradient-hero-wash);
+  background-color: var(--color-ground-white);
+  padding-block: 88px 76px;
+  overflow: visible;
+}
+
+.inner {
+  display: flex;
+  gap: 72px;
+  align-items: center;
+}
+
+.copy {
+  flex: none;
+  width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  align-items: flex-start;
+}
+
+/* The badge is a real chip in the design — white fill, hairline edge, pill. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-pill);
+  color: var(--color-image-sky-deep);
+  letter-spacing: 0;
+}
+
+/* The dot is CTA green — legal, because it is a FILL, not type. The label
+   beside it is sky-deep. */
+.dot {
+  flex: none;
+  width: 7px;
+  height: 7px;
+}
+
+.headline {
+  width: 620px;
+}
+
+/* Body copy is ink.primary at 16px — the token file scopes ink.secondary to
+   captions, meta and legal, and the artboard agrees. */
+.subhead {
+  width: 545px;
+  max-width: 100%;
+  color: var(--color-ink-primary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Caption size, per the artboard — this is meta, so ink.secondary is correct
+   and it sits on white, where the token's 4.6:1 guarantee holds. */
+.trust {
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line);
+  font-weight: var(--type-caption-weight);
+  color: var(--color-ink-secondary);
+}
+
+@media (max-width: 1180px) {
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+  .copy {
+    width: 100%;
+  }
+  .headline,
+  .subhead {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-block: 40px 56px;
+  }
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .actions > * {
+    width: 100%;
+  }
+}

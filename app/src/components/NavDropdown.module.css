@@ -1,0 +1,663 @@
+/* ---------------------------------------------------------------------------
+   Nav mega-menu panel. Every number below is measured from live rayobyte.com
+   (2026-09-01), because the Figma artboard draws the nav bar but not the
+   panels its chevrons open.
+
+   Live measurements reproduced here:
+     panel    absolute, full nav width, white, radius 0 0 20px 20px,
+              shadow rgba(0,0,0,.2) 0 6px 7px, padding 24px <gutter> 32px
+     card     flex, gap 13, radius 5, hover shadow rgba(0,0,0,.2) 5px 5px 5px
+     rail     43px wide, full card height, one of eight pastel tints
+     title    14px / 700 / 20 / ink.primary
+     desc     13px / 400 / 19 / ink.primary
+     heading  16px / 600 / ink.primary, with a rule under it
+     grid     298px columns, gap 17.6px row / 28.8px column
+     see-all  pill, 2px border, 15px / 700, padding 13px 36px
+--------------------------------------------------------------------------- */
+
+/* Deliberately NOT position:relative — the mega-menu panel must resolve its
+   absolute positioning against the full-width nav row (.rowHost in
+   Nav.module.css), not against the toggle. Making this relative confines the
+   panel to the width of its label. */
+.root {
+  display: inline-flex;
+}
+
+/* The utility-bar dropdowns DO anchor to their own toggle, so they get the
+   containing block the mega-menus must not have. */
+.utilRoot {
+  position: relative;
+  display: inline-flex;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 17px;
+  line-height: 27px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+  transition: color 0.2s, font-weight 0.2s;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.toggle:hover {
+  color: var(--color-image-sky-deep);
+}
+
+.chevron {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s;
+}
+
+.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* --- panel -------------------------------------------------------------- */
+/* Pinned to the nav row, not to the toggle: the live panel spans the full
+   width of the nav and drops from its bottom edge. `.panelHost` is the
+   full-width positioning context supplied by the Nav component. */
+
+.panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  z-index: 60;
+  background: var(--color-ground-white);
+  border-radius: 0 0 20px 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 6px 7px 0;
+  /* Padding is a PERCENTAGE, not the 86px chrome gutter — the live rule is
+     `padding: 1.5rem 7% 2rem`. That matters a lot at wide viewports: 7% is
+     88.5px at a 1265px page but 132px at 1885px, so a fixed gutter leaves the
+     panel content sitting far too close to the edge on a large screen. */
+  /* Side inset widened from the live 7% on request, to give the content block
+     more room at the panel edges. --nav-group-gap is the channel between
+     column groups; both are deliberate steps away from the live values and are
+     the two knobs for this panel's breathing room. */
+  --nav-panel-inset: 9%;
+  --nav-group-gap: 64px;
+
+  padding: 24px var(--nav-panel-inset) 32px;
+  border-top: 2px solid #eee;
+  animation: drop 0.16s ease-out;
+}
+
+/* ---------------------------------------------------------------------------
+   HOVER BRIDGE — load-bearing, not decoration.
+
+   The toggle sits inside the nav row and the panel hangs below the row, which
+   leaves a ~26px strip between them that belongs to the row, not to this
+   dropdown. Without this, moving the pointer down from the label crosses that
+   dead strip, mouseleave fires on the root, and the panel unmounts before the
+   pointer ever reaches it — the menu is impossible to click into.
+
+   The bridge is a pseudo-element of the PANEL, and the panel is a DOM
+   descendant of the root, so hovering the bridge still counts as being inside
+   the root and no mouseleave fires. Transparent, sits above the panel, spans
+   its full width. Do not remove without replacing the behaviour.
+--------------------------------------------------------------------------- */
+.panel::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  height: 32px;
+}
+
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The groups row is CENTRED inside the 1088px content column — it is not
+   flush-left. This is easy to get wrong and very visible when you do: an
+   earlier pass left-aligned every panel at the 86px gutter, which put the
+   content ~56px left of where the live site puts it.
+
+   Measured live at a 1265px page (content column 1088 starting at x=89):
+     Products  row  978 -> left 143   = 89 + (1088-978)/2
+     Pricing   row 1088 -> left  89   (fills the column exactly)
+     Culture   row  986 -> left 140   = 89 + (1088-986)/2
+
+   Centring reproduces all three from the content widths alone, so nothing
+   here is hard-coded per menu.
+
+   Groups carry a 30px right padding (a live group measures its own grid plus
+   30), dropped on the last one so the centring stays symmetric.
+--------------------------------------------------------------------------- */
+.groups {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.heading {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--color-ink-primary);
+}
+
+/* The rule under each group heading. */
+.rule {
+  height: 2px;
+  background: var(--color-ground-hairline);
+  border-radius: 1px;
+}
+
+.grid {
+  display: grid;
+  gap: 17.6px 28.8px;
+  /* The channel between column groups. Live puts 30px here (on .nav_grid
+     itself, not on the group); this build widens it on request because 30px
+     read as too tight between Proxy Solutions and Scraping Solutions.
+     Set from one variable so it is a single edit to tune or to put back to the
+     live 30px. */
+  margin-right: var(--nav-group-gap);
+}
+
+/* The single-column group is NARROWER than the two-column one: live Products
+   puts 298px cards in the Proxy grid but 293px cards in the Scraping grid.
+   Measured, not assumed. */
+.cols1 {
+  grid-template-columns: 293px;
+}
+
+.cols2 {
+  grid-template-columns: repeat(2, 298px);
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, 298px);
+}
+
+/* --- card --------------------------------------------------------------- */
+
+.card {
+  display: flex;
+  align-items: stretch;
+  gap: 13px;
+  border-radius: 5px;
+  padding-right: 10px;
+  background: var(--color-ground-white);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  /* The live card carries a VISIBLE 1px #ECECEC edge — an earlier pass here
+     made it transparent, which lost the card boundaries entirely. The border
+     is also the last 2px of the card's 105px height. min-height is the live
+     floor, so short cards (Support Ukraine, the Culture story) match the tall
+     ones instead of collapsing.
+
+     #ECECEC and the #F5F5F5 divider below are the live site's greys, not
+     ground.hairline #E1E6F4 — two more off-palette neutrals, flagged with the
+     rail tints in navMenus.ts. */
+  border: 1px solid #ececec;
+  /* Live declares an EXPLICIT height, not a content-driven one:
+       ._3-columns          height 105, min 95, max 126
+       ._3-columns.pricing  height 125  -> 100 at >=1440
+       ._3-columns.educ     height 120  -> 113 at >=1440
+     Keeping the explicit height is what makes every card in a grid line up. */
+  height: 105px;
+  min-height: 95px;
+  max-height: 126px;
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;
+}
+
+/* The coloured rail. Tint comes from the item, set inline — the eight pastels
+   live in navMenus.ts and are off-palette; see the caveat there. */
+.rail {
+  flex: none;
+  width: 43px;
+  display: grid;
+  place-items: center;
+  align-self: stretch;
+  padding-block: 13px;
+}
+
+/* Both dimensions explicit, and deliberately NOT square.
+   The live site renders each glyph into a 22 x 77 box. The source SVGs are
+   small (16x21, 21x19, 24x24...), so with the default preserveAspectRatio they
+   letterbox: the glyph draws at its own ratio, centred, in a tall box. That
+   tall box is what gives the rail its 103px height and the card its 105px —
+   sizing these square collapses the card to 85px and stops matching. */
+.railIcon {
+  width: 22px;
+  height: 77px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-block: 6px;
+  min-width: 0;
+}
+
+.title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+.desc {
+  font-size: 13px;
+  line-height: 19px;
+  font-weight: 400;
+  color: var(--color-ink-primary);
+}
+
+/* Pricing menu only. */
+.price {
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.priceLabel {
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  color: var(--color-ink-secondary);
+}
+
+.priceValue {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  color: var(--color-ink-primary);
+}
+
+/* --- see-all pill ------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------------
+   The groups row and the see-all button are ONE centred block, not two
+   independently positioned children.
+
+   Live wraps both in `.div-block-85` (a flex-start column, gap 24) and centres
+   that whole block. Because the button left-aligns inside it, it picks up the
+   row's left edge for free.
+
+   Getting this wrong is very visible: with .footer as a direct child of the
+   panel it starts at the panel's padding edge while the centred row starts
+   much further in, so the pill sits alone out to the left of every card above
+   it. Keep them in the same wrapper.
+--------------------------------------------------------------------------- */
+.inner {
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.footer {
+  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-ground-hairline);
+}
+
+.seeAll {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 36px;
+  border-radius: var(--radius-pill);
+  border: 2px solid currentColor;
+  background: transparent;
+  font-size: 15px;
+  line-height: 21px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+/* The live site uses image.pink for Products and image.sky for Pricing and
+   Solutions. Both are palette colours — but the token file scopes them to
+   "gradient stop and illustration only, never sets type" because neither
+   passes AA as type on white (pink 3.78:1, sky 2.48:1). Reproduced to match
+   the live site; sky-deep would be the accessible substitute for both. */
+.tonePink {
+  color: var(--color-image-pink);
+}
+
+.toneSky {
+  color: var(--color-image-sky);
+}
+
+.seeAll:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* --- utility-bar dropdown ----------------------------------------------- */
+
+.utilPanel {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 60;
+  min-width: 220px;
+  margin-top: 6px;
+  background: var(--color-ground-white);
+  border: 1px solid var(--color-ground-hairline);
+  border-radius: var(--radius-card);
+  box-shadow: rgba(0, 0, 0, 0.12) 0 6px 16px 0;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  animation: drop 0.16s ease-out;
+}
+
+.utilItem {
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  color: var(--color-ink-primary);
+  white-space: nowrap;
+  transition: background-color 0.2s;
+}
+
+.utilItem:hover {
+  background: var(--color-ground-tint);
+}
+
+/* --- narrow screens ------------------------------------------------------ */
+/* The live panel is a fixed 3-across layout that cannot survive a phone
+   width. Below the nav's own breakpoint the Nav component renders the mobile
+   panel instead, so this only needs to cover the tablet band. */
+
+/* The fixed-width layout needs 2x298 + 28.8 (proxy group) + 342 (scraping
+   group) + 48 gap + 172 gutters = ~1187px. Below that the columns go fluid
+   rather than overflowing; above it they stay at the live site's 298px. */
+@media (max-width: 1186px) {
+  .cols2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .cols3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .cols1 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .groups {
+    gap: 32px;
+  }
+  .group {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   PRICING VARIANT
+
+   The Pricing menu uses a different card from every other menu, which is easy
+   to miss. Measured live, Products vs Pricing:
+
+              width   height   gap   rail
+     default    298      105     13     43
+     pricing    333      125     12     35
+
+   The price is NOT stacked under the description — it is a right-hand column
+   behind a 2px vertical rule, vertically centred against the body.
+--------------------------------------------------------------------------- */
+
+.cardPricing {
+  gap: 12px;
+  height: 125px;
+  max-height: 126px;
+}
+
+.cardPricing .rail {
+  width: 35px;
+}
+
+.pricingBody {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* The vertical rule between description and price. Drawn as a right border on
+   a 2px-wide box, which is how the live site does it. */
+.priceDivider {
+  flex: none;
+  width: 2px;
+  align-self: center;
+  height: 100px;
+  border-right: 2px solid #f5f5f5;
+}
+
+/* Fixed width, deliberately.
+
+   Left to size itself, this column is as wide as whatever is in it — "From
+   $1/IP" measured 33px against "As low as $0.50/GB" at 64px. Because the
+   divider sits immediately before it, that 31px spread pushed the rule to a
+   different x in every card, so the price gutters read as ragged down the
+   grid.
+
+   64px is the widest real content ("As low as" over "$0.50/GB"). Pinning it
+   puts every divider at the same offset and lets the labels centre in a
+   consistent column. Widen this if a longer price string is ever added. */
+.priceCol {
+  flex: none;
+  width: 64px;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.priceColLabel {
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 400;
+  color: var(--color-ink-primary);
+  white-space: nowrap;
+}
+
+.priceColValue {
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 600;
+  color: var(--color-ink-primary);
+  white-space: nowrap;
+}
+
+/* Pricing grids are 333px columns, not 298. */
+.pcols1 {
+  grid-template-columns: 332px;
+}
+
+.pcols2 {
+  grid-template-columns: repeat(2, 333px);
+}
+
+/* Same threshold as the default columns — firing at exactly 1280 made the
+   single-column pricing grid go fluid on a 1280 viewport. */
+@media (max-width: 1186px) {
+  .pcols1 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pcols2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   STORY CARD — the Culture menu's "Latest Rayobyte Stories" tile.
+
+   Not a rail card at all: a 300 x 300 image tile, radius 10, with the headline
+   sitting at the bottom over a gradient that fades from action.nav up to
+   transparent. Measured live:
+     tile      300 x 300, radius 10, padding 0 20px 20px, align-items flex-end
+     overlay   linear-gradient(0deg, #1B4DCA 19%, transparent 69%)
+     headline  15 / 500 / 22.5, white
+
+   NOTE on the palette: that gradient is action.nav #1B4DCA, which the token
+   file scopes to "nav bar CTA fill only". This IS nav chrome, so it is a
+   defensible reading, but it is a wider use than the token's wording — flagged
+   rather than assumed.
+--------------------------------------------------------------------------- */
+
+.story {
+  display: flex;
+  align-items: flex-end;
+  width: 300px;
+  height: 300px;
+  border-radius: var(--radius-card);
+  padding: 0 20px 20px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  transition: box-shadow 0.2s;
+}
+
+.story::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, #1b4dca 19%, rgba(255, 255, 255, 0) 69%);
+  border-radius: inherit;
+}
+
+.story:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;
+}
+
+.storyTitle {
+  position: relative;
+  z-index: 1;
+  font-size: 15px;
+  line-height: 22.5px;
+  font-weight: 500;
+  color: var(--color-ground-white);
+}
+
+@media (max-width: 1186px) {
+  .story {
+    width: 100%;
+    height: 220px;
+  }
+}
+
+/* Education cards are taller than the default (their descriptions run longer). */
+.cardEducation {
+  height: 120px;
+}
+
+/* ---------------------------------------------------------------------------
+   >=1440 STEP — the live site changes both card size and height here.
+
+   Measured at a 1885px page against a 1265px one:
+     Products   card 298 -> 348   (single-column group 293 -> 350)
+     Pricing    card 333 -> 364, height 125 -> 100
+     Education  card 298 -> 300, height 120 -> 113
+     Culture    card 298 -> 298   (unchanged)
+     Solutions  card 298 -> 300
+
+   Without this the panel keeps 298px cards on a wide screen while the live one
+   grows them, which is what made this build look cramped next to the real
+   site.
+--------------------------------------------------------------------------- */
+@media (min-width: 1440px) {
+  .cols1 {
+    grid-template-columns: 350px;
+  }
+  .cols2 {
+    grid-template-columns: repeat(2, 348px);
+  }
+  .cols3 {
+    grid-template-columns: repeat(3, 300px);
+  }
+  .pcols1 {
+    grid-template-columns: 363px;
+  }
+  .pcols2 {
+    grid-template-columns: repeat(2, 364px);
+  }
+  .cardPricing {
+    height: 100px;
+  }
+  .cardEducation {
+    height: 113px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   CULTURE — the one menu whose cards do NOT grow at >=1440.
+
+   Live has a dedicated `.nav_grid.culture { grid-template-columns: 1fr 1fr }`
+   repeated at base, >=1440 and >=1920, and its cards measure 298px at both a
+   1265px and an 1885px page. Sharing .cols2 made them jump to 348 on wide
+   screens, 50px wider than the real thing.
+
+   The row also carries a 31px gap here (`.flex-block-106.culture`), which is
+   what sits between the card grid and the story tile.
+--------------------------------------------------------------------------- */
+.ccols1 {
+  grid-template-columns: 293px;
+}
+
+.ccols2 {
+  grid-template-columns: repeat(2, 298px);
+}
+
+@media (max-width: 1186px) {
+  .ccols1 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ccols2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* No trailing channel after the last group.
+   The gutter belongs BETWEEN groups; leaving it on the last one folds dead
+   space into the centred row, so the visible content ends up sitting half the
+   gutter left of true centre (with a 64px gutter that is a 32px lean, and it
+   shows). Live has the same quirk at its 30px, but since this build widens the
+   gutter deliberately, symmetric centring is the better call.
+
+   This also covers the Culture story tile, which is not inside a grid on the
+   live site and so never carried the margin there either. */
+.group:last-child .grid {
+  margin-right: 0;
+}
