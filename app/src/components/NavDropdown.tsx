@@ -165,7 +165,7 @@ function Card({
             src={`${BASE}assets/nav/${item.icon}.svg`}
             alt=""
             width={22}
-            height={77}
+            height={22}
           />
         )}
       </span>

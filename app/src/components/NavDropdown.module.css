@@ -246,15 +246,32 @@
   padding-block: 13px;
 }
 
-/* Both dimensions explicit, and deliberately NOT square.
-   The live site renders each glyph into a 22 x 77 box. The source SVGs are
-   small (16x21, 21x19, 24x24...), so with the default preserveAspectRatio they
-   letterbox: the glyph draws at its own ratio, centred, in a tall box. That
-   tall box is what gives the rail its 103px height and the card its 105px —
-   sizing these square collapses the card to 85px and stops matching. */
+/* ---------------------------------------------------------------------------
+   A SQUARE box, so glyphs normalise by their longest side.
+
+   This was a 22 x 77 box, copying the live site. Two problems with that:
+
+   1. A very tall box is width-constrained for every glyph, so each one renders
+      at a fixed WIDTH and whatever height its aspect gives. Wide glyphs came
+      out short — rotating-isp measured 19 x 16 against rayobrowse's 22 x 22,
+      about 37% less ink area, which is why those two read as "very small".
+   2. It was also load-bearing for the card height back when the card sized
+      itself. It no longer is: .card sets an explicit 105px, so the icon box is
+      free to change.
+
+   A square normalises by the LONGER side instead, which is the usual way to
+   size a mixed icon set — no glyph can now be dramatically smaller than its
+   neighbours in its dominant dimension.
+
+   The other half of the fix was in the assets: the source SVGs carried
+   inconsistent padding inside their viewBoxes (rotating-isp's artwork started
+   at y=4.06 of a 29-tall box, while most start near 0), so they have all been
+   cropped to their exact ink bounds. Both halves are needed — cropping alone
+   still leaves wide glyphs short in a tall box.
+--------------------------------------------------------------------------- */
 .railIcon {
   width: 22px;
-  height: 77px;
+  height: 22px;
 }
 
 .body {
