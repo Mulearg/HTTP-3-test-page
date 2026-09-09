@@ -1,13 +1,14 @@
-import { Section } from '../components/Section'
+﻿import { Section } from '../components/Section'
 import { proof } from '../content'
 import styles from './Proof.module.css'
+const BASE = import.meta.env.BASE_URL
 
 export function Proof() {
   return (
     <Section id="proof">
       <div className={styles.inner}>
         <figure className={styles.testimonial}>
-          <img className={styles.quoteMark} src="/assets/icons/quote-mark.svg" alt="" width={34} height={26} />
+          <img className={styles.quoteMark} src={`${BASE}assets/icons/quote-mark.svg`} alt="" width={34} height={26} />
           <blockquote className={styles.quote}>{proof.quote}</blockquote>
           <figcaption className={styles.attribution}>
             <span className={styles.name}>{proof.attributionName}</span>
@@ -15,7 +16,7 @@ export function Proof() {
           </figcaption>
         </figure>
 
-        {/* duotone-band at 9%, the body wash — NOT duotone-tint at 18%, which
+        {/* duotone-band at 9%, the body wash â€” NOT duotone-tint at 18%, which
             the token file scopes to imagery. */}
         <div className={styles.useCases}>
           <h3 className={styles.useEyebrow}>{proof.useCasesEyebrow}</h3>

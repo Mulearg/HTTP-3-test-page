@@ -1,7 +1,8 @@
-import { Section } from '../components/Section'
+﻿import { Section } from '../components/Section'
 import { CodeBlock } from '../components/CodeBlock'
 import { howYouConnect } from '../content'
 import styles from './HowYouConnect.module.css'
+const BASE = import.meta.env.BASE_URL
 
 export function HowYouConnect() {
   return (
@@ -22,7 +23,7 @@ export function HowYouConnect() {
           <ul className={styles.rules}>
             {howYouConnect.rules.map((rule) => (
               <li key={rule} className={styles.rule}>
-                <img className={styles.check} src="/assets/icons/check-19.svg" alt="" width={19} height={19} />
+                <img className={styles.check} src={`${BASE}assets/icons/check-19.svg`} alt="" width={19} height={19} />
                 <span>{rule}</span>
               </li>
             ))}

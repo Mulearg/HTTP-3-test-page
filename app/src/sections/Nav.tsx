@@ -1,9 +1,10 @@
-import { useState } from 'react'
+﻿import { useState } from 'react'
 import { Button } from '../components/Button'
 import { NavDropdown, UtilityDropdown } from '../components/NavDropdown'
 import { nav } from '../content'
 import { navMenus, utilityMenus } from '../navMenus'
 import styles from './Nav.module.css'
+const BASE = import.meta.env.BASE_URL
 
 export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -12,7 +13,7 @@ export function Nav() {
 
   return (
     <header className={styles.wrap}>
-      {/* Utility band — warm grey, right-aligned, bottom corners only. */}
+      {/* Utility band â€” warm grey, right-aligned, bottom corners only. */}
       <div className="container-chrome">
         <div className={styles.band}>
           <a className={styles.bandLink} href="https://rayobyte.com/contact-us/">
@@ -22,7 +23,7 @@ export function Nav() {
 
           <UtilityDropdown label="Partners" items={utilityMenus.Partners} className={styles.bandLink}>
             {nav.utility.partners}
-            <img className={styles.chevronSm} src="/assets/icons/chevron-13.svg" alt="" width={13} height={13} />
+            <img className={styles.chevronSm} src={`${BASE}assets/icons/chevron-13.svg`} alt="" width={13} height={13} />
           </UtilityDropdown>
 
           <span className={styles.sep} />
@@ -32,23 +33,23 @@ export function Nav() {
             items={utilityMenus['Log in']}
             className={`${styles.bandLink} ${styles.bandLogin}`}
           >
-            <img className={styles.avatar} src="/assets/icons/user-22.svg" alt="" width={22} height={22} />
+            <img className={styles.avatar} src={`${BASE}assets/icons/user-22.svg`} alt="" width={22} height={22} />
             {nav.utility.login}
-            <img className={styles.chevronSm} src="/assets/icons/chevron-13b.svg" alt="" width={13} height={13} />
+            <img className={styles.chevronSm} src={`${BASE}assets/icons/chevron-13b.svg`} alt="" width={13} height={13} />
           </UtilityDropdown>
         </div>
       </div>
 
       {/* The mega-menu panels span the full nav width and drop from its bottom
-          edge, so this row is their positioning context — not each toggle. */}
+          edge, so this row is their positioning context â€” not each toggle. */}
       <div className={styles.rowHost}>
         <div className="container-chrome">
           <div className={styles.row}>
             <a href="/" aria-label="Rayobyte home">
               {/* The lockup's wordmark is chrome.wordmark #231F20, deliberately
                   a different black from ink.primary. It ships inside the asset
-                  — do not recolour it. */}
-              <img className={styles.logo} src="/assets/logo-black.svg" alt="Rayobyte" width={157} height={30} />
+                  â€” do not recolour it. */}
+              <img className={styles.logo} src={`${BASE}assets/logo-black.svg`} alt="Rayobyte" width={157} height={30} />
             </a>
 
             <nav className={styles.links}>
@@ -90,7 +91,7 @@ export function Nav() {
               <details key={label} className={styles.mobileGroup}>
                 <summary className={styles.mobileSummary}>
                   {label}
-                  <img className={styles.chevron} src="/assets/icons/chevron-14.svg" alt="" width={14} height={14} />
+                  <img className={styles.chevron} src={`${BASE}assets/icons/chevron-14.svg`} alt="" width={14} height={14} />
                 </summary>
                 <div className={styles.mobileItems}>
                   {navMenus[label].groups.flatMap((g) => g.items).map((item) => (

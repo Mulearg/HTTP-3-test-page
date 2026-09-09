@@ -1,7 +1,8 @@
-import { Button } from '../components/Button'
+﻿import { Button } from '../components/Button'
 import { StreamDiagram } from '../components/StreamDiagram'
 import { hero } from '../content'
 import styles from './Hero.module.css'
+const BASE = import.meta.env.BASE_URL
 
 export function Hero() {
   return (
@@ -10,7 +11,7 @@ export function Hero() {
         <div className={styles.inner}>
           <div className={styles.copy}>
             <span className={`t-eyebrow ${styles.badge}`}>
-              <img className={styles.dot} src="/assets/icons/hero-dot.svg" alt="" width={7} height={7} />
+              <img className={styles.dot} src={`${BASE}assets/icons/hero-dot.svg`} alt="" width={7} height={7} />
               {hero.eyebrow}
             </span>
 
@@ -31,7 +32,7 @@ export function Hero() {
               </Button>
             </div>
 
-            {/* States the availability fact positively — the line that replaces
+            {/* States the availability fact positively â€” the line that replaces
                 the removed pricing section's incorrect claim that HTTP/3
                 shipped on Rotating ISP and Mobile too. */}
             <p className={styles.trust}>{hero.trustLine}</p>

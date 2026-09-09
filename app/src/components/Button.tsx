@@ -1,5 +1,6 @@
-import type { AnchorHTMLAttributes, ReactNode } from 'react'
+﻿import type { AnchorHTMLAttributes, ReactNode } from 'react'
 import styles from './Button.module.css'
+const BASE = import.meta.env.BASE_URL
 
 /**
  * The three button roles.
@@ -9,7 +10,7 @@ import styles from './Button.module.css'
  *   Button / Secondary 28006:20  (3 variants)
  *   Button / Nav       28006:27  (3 variants)
  *
- * State is handled by CSS pseudo-classes rather than a prop — the Figma
+ * State is handled by CSS pseudo-classes rather than a prop â€” the Figma
  * variants exist because Figma has no hover, not because the states are
  * addressable in code.
  *
@@ -22,7 +23,7 @@ type ButtonProps = {
   variant?: Variant
   /** Maps to the `Label` text property on all three Figma components. */
   children: ReactNode
-  /** Primary only — pins the badge and centres the label (Layout=Fill). */
+  /** Primary only â€” pins the badge and centres the label (Layout=Fill). */
   fullWidth?: boolean
   href?: string
 } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'>
@@ -48,11 +49,11 @@ export function Button({
     <a className={classes} href={href} {...rest}>
       {variant === 'primary' && (
         <span className={styles.badge}>
-          {/* Exported from the artboard rather than redrawn — the glyph is a
+          {/* Exported from the artboard rather than redrawn â€” the glyph is a
               diagonal arrow, not the horizontal one an earlier pass guessed. */}
           <img
             className={styles.badgeGlyph}
-            src="/assets/icons/badge-arrow.svg"
+            src={`${BASE}assets/icons/badge-arrow.svg`}
             alt=""
             width={24}
             height={24}

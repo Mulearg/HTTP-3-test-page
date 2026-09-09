@@ -1,15 +1,15 @@
-/* ---------------------------------------------------------------------------
+﻿/* ---------------------------------------------------------------------------
    Nav mega-menu contents, read from the LIVE SITE (https://rayobyte.com) on
    2026-09-01, not from the Figma artboard.
 
    The artboard draws the nav bar with five labelled items and a chevron on
    each, but does not draw the panels those chevrons open. The live site is
-   therefore the only source for this, and everything below — copy, hrefs,
-   grouping, icon assets and the per-item rail tints — is measured from it.
+   therefore the only source for this, and everything below â€” copy, hrefs,
+   grouping, icon assets and the per-item rail tints â€” is measured from it.
 
    ONE PALETTE CAVEAT, flagged rather than silently normalised: the icon rail
    tints are eight pastels that appear nowhere in rayobyte.tokens.json. They
-   are not on the retired list either, so nothing here is forbidden — but they
+   are not on the retired list either, so nothing here is forbidden â€” but they
    do widen the palette. Reproduced because matching the live site was the
    brief; centralised in RAIL below so they are one edit to re-map.
 
@@ -40,7 +40,7 @@ export type MenuItem = {
   /** Pricing menu only. */
   priceLabel?: string
   price?: string
-  /** Culture only — renders as a 300x300 image tile instead of a rail card. */
+  /** Culture only â€” renders as a 300x300 image tile instead of a rail card. */
   image?: string
 }
 
@@ -196,7 +196,7 @@ export const navMenus: Record<string, Menu> = {
           { title: 'Rayobyte Stories', desc: 'See how Rayobyte customers and employees are bringing great ideas to life!', href: 'https://rayobyte.com/stories/', icon: 'stories', rail: 'green' },
           { title: 'Team', desc: 'Meet the men and women working tirelessly to bring you great products.', href: 'https://rayobyte.com/about/people/', icon: 'team', rail: 'rose' },
           { title: 'Careers', desc: 'See open roles and help us bring great ideas to life!', href: 'https://rayobyte.com/about/people/careers/', icon: 'careers', rail: 'peach' },
-          // No icon on the live site — the rail carries the colour alone.
+          // No icon on the live site â€” the rail carries the colour alone.
           { title: 'Support Ukraine', desc: 'Ukraine Support Campaign 2024', href: 'https://rayobyte.com/about/support-ukraine/', rail: 'violet' },
         ],
       },

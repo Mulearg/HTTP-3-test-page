@@ -1,10 +1,11 @@
-import { useEffect, useId, useRef, useState } from 'react'
+﻿import { useEffect, useId, useRef, useState } from 'react'
 import { RAIL, type Menu, type MenuItem } from '../navMenus'
 import styles from './NavDropdown.module.css'
+const BASE = import.meta.env.BASE_URL
 
 /**
  * Which grid-column classes a menu uses. Three of the five menus size their
- * columns differently, and Culture is the one that does NOT grow at >=1440 —
+ * columns differently, and Culture is the one that does NOT grow at >=1440 â€”
  * see the notes in NavDropdown.module.css.
  */
 const COLS_PREFIX = {
@@ -21,7 +22,7 @@ const COLS_PREFIX = {
  * keeps the hover behaviour so it feels the same, and adds the keyboard one the
  * original lacks: the toggle is a real button with aria-expanded, Enter/Space
  * open it, Escape closes and returns focus, and the panel closes when focus
- * leaves it. That is additive — nothing about the pointer behaviour changes.
+ * leaves it. That is additive â€” nothing about the pointer behaviour changes.
  */
 export function NavDropdown({
   label,
@@ -71,13 +72,13 @@ export function NavDropdown({
         onFocus={() => onOpenChange(true)}
       >
         {label}
-        <img className={styles.chevron} src="/assets/icons/chevron-14.svg" alt="" width={14} height={14} />
+        <img className={styles.chevron} src={`${BASE}assets/icons/chevron-14.svg`} alt="" width={14} height={14} />
       </button>
 
       {isOpen && (
         <div className={styles.panel} id={panelId}>
           {/* groups + footer share one centred wrapper so the see-all button
-              lines up with the cards above it — see .inner in the stylesheet. */}
+              lines up with the cards above it â€” see .inner in the stylesheet. */}
           <div className={styles.inner}>
             <div className={styles.groups}>
             {menu.groups.map((group, gi) => (
@@ -130,14 +131,14 @@ function Card({
   const isPricing = variant === 'pricing'
   const isEducation = variant === 'education'
 
-  // The Culture menu's story tile is a different object entirely — a 300x300
-  // image with the headline over a gradient — not a rail card.
+  // The Culture menu's story tile is a different object entirely â€” a 300x300
+  // image with the headline over a gradient â€” not a rail card.
   if (item.image) {
     return (
       <a
         className={styles.story}
         href={item.href}
-        style={{ backgroundImage: `url(/assets/nav/${item.image})` }}
+        style={{ backgroundImage: `url(${BASE}assets/nav/${item.image})` }}
       >
         <span className={styles.storyTitle}>{item.title}</span>
       </a>
@@ -155,13 +156,13 @@ function Card({
         .join(' ')}
       href={item.href}
     >
-      {/* The rail's tint is the only inline style here — it is per-item data,
+      {/* The rail's tint is the only inline style here â€” it is per-item data,
           not a class, and the eight values live in navMenus.ts. */}
       <span className={styles.rail} style={{ background: RAIL[item.rail] }}>
         {item.icon && (
           <img
             className={styles.railIcon}
-            src={`/assets/nav/${item.icon}.svg`}
+            src={`${BASE}assets/nav/${item.icon}.svg`}
             alt=""
             width={22}
             height={77}
@@ -210,8 +211,8 @@ export function UtilityDropdown({
      Close on a short grace period, not immediately.
 
      These panels are ~220px wide but hang off a ~77px toggle, overhanging
-     ~143px to the LEFT. The strip beside the toggle — horizontally inside the
-     panel, vertically above it — belongs to the utility bar, not to this
+     ~143px to the LEFT. The strip beside the toggle â€” horizontally inside the
+     panel, vertically above it â€” belongs to the utility bar, not to this
      dropdown. Any diagonal move toward a left-hand item crosses it, fires
      mouseleave, and the panel closes before the pointer arrives; that is what
      made these two menus unselectable.
