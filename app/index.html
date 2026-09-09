@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- NOINDEX — deliberate, and load-bearing.
+         This page reproduces copy, product names and prices that already live
+         on rayobyte.com. Indexed here it would be duplicate content on a second
+         domain, competing with the real site for the same terms.
+         Remove this line, and the Disallow in robots.txt, only when the page
+         ships as the canonical version. -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="canonical" href="https://http-3-test-page.vercel.app/" />
+
     <!-- Plus Jakarta Sans 400-700 is the entire brand.
          JetBrains Mono is loaded at 400 only, for the two code blocks that
          need it - a documented exception to "no secondary face"
@@ -15,9 +25,38 @@
       rel="stylesheet"
     />
 
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#050038" />
+
     <title>HTTP/3 over QUIC, across 40M+ residential IPs | Rayobyte</title>
     <meta
       name="description"
+      content="HTTP/3 tunnelled through SOCKS5 UDP on the same gateway, port and credentials you already use. Live on Residential from two entry points."
+    />
+
+    <!-- Share previews. og:image is deliberately absent: no 1200x630 asset
+         exists yet, and a broken image reference previews worse than none.
+         tools/og-card.html renders the card and carries the one command that
+         produces it; add og:image and switch twitter:card to
+         summary_large_image once public/og.png is committed. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rayobyte" />
+    <meta property="og:url" content="https://http-3-test-page.vercel.app/" />
+    <meta
+      property="og:title"
+      content="HTTP/3 over QUIC, across 40M+ residential IPs"
+    />
+    <meta
+      property="og:description"
+      content="HTTP/3 tunnelled through SOCKS5 UDP on the same gateway, port and credentials you already use. Live on Residential from two entry points."
+    />
+    <meta name="twitter:card" content="summary" />
+    <meta
+      name="twitter:title"
+      content="HTTP/3 over QUIC, across 40M+ residential IPs"
+    />
+    <meta
+      name="twitter:description"
       content="HTTP/3 tunnelled through SOCKS5 UDP on the same gateway, port and credentials you already use. Live on Residential from two entry points."
     />
   </head>

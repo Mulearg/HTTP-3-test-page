@@ -52,7 +52,7 @@ export function Nav() {
               <img className={styles.logo} src={`${BASE}assets/logo-black.svg`} alt="Rayobyte" width={157} height={30} />
             </a>
 
-            <nav className={styles.links}>
+            <nav className={styles.links} aria-label="Primary">
               {nav.links.map((label) => (
                 <NavDropdown
                   key={label}

@@ -1,4 +1,5 @@
-﻿import { Button } from '../components/Button'
+﻿import { Fragment } from 'react'
+import { Button } from '../components/Button'
 import { StreamDiagram } from '../components/StreamDiagram'
 import { hero } from '../content'
 import styles from './Hero.module.css'
@@ -6,7 +7,7 @@ const BASE = import.meta.env.BASE_URL
 
 export function Hero() {
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} aria-labelledby="hero-headline">
       <div className="container">
         <div className={styles.inner}>
           <div className={styles.copy}>
@@ -15,11 +16,24 @@ export function Hero() {
               {hero.eyebrow}
             </span>
 
-            <h1 className={`t-h1 ${styles.headline}`}>
+            {/* The artboard breaks this headline across two lines. Rendering
+                each line as a block-level span produced two adjacent text
+                nodes with no whitespace between them, so anything reading
+                textContent — crawlers, share scrapers, screen readers — got
+                "HTTP/3 over QUIC,across 40M+ residential IPs" with the space
+                missing. Joining with a real space and letting <br> do the
+                break keeps the visual line break and the correct text. */}
+            <h1 id="hero-headline" className={`t-h1 ${styles.headline}`}>
               {hero.headlineLines.map((line, i) => (
-                <span key={i} style={{ display: 'block' }}>
+                <Fragment key={i}>
+                  {i > 0 && (
+                    <>
+                      {' '}
+                      <br />
+                    </>
+                  )}
                   {line}
-                </span>
+                </Fragment>
               ))}
             </h1>
 

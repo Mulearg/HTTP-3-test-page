@@ -4,11 +4,11 @@ import styles from './ClosingCta.module.css'
 
 export function ClosingCta() {
   return (
-    <section id="start" className={styles.wrap}>
+    <section id="start" className={styles.wrap} aria-labelledby="closing-cta-heading">
       <div className="container">
         <div className={styles.inner}>
           <div className={styles.copy}>
-            <h2 className={`t-h2 ${styles.heading}`}>{closingCta.heading}</h2>
+            <h2 id="closing-cta-heading" className={`t-h2 ${styles.heading}`}>{closingCta.heading}</h2>
             <p className={`t-body ${styles.body}`}>{closingCta.body}</p>
           </div>
           <div className={styles.actions}>

@@ -6,13 +6,13 @@ const BASE = import.meta.env.BASE_URL
 
 export function HowYouConnect() {
   return (
-    <Section id="connect">
+    <Section id="connect" labelledBy="connect-heading">
       <div className={styles.inner}>
         <div className={styles.copy}>
           <span className="t-eyebrow" style={{ color: 'var(--color-image-sky-deep)', letterSpacing: '1.4px' }}>
             {howYouConnect.eyebrow}
           </span>
-          <h2 className="t-h2" style={{ maxWidth: 470 }}>
+          <h2 id="connect-heading" className="t-h2" style={{ maxWidth: 470 }}>
             {howYouConnect.heading}
           </h2>
           <p className={`t-body ${styles.body}`}>{howYouConnect.body}</p>

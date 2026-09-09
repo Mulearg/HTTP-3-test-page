@@ -3,7 +3,7 @@ import styles from './StatBand.module.css'
 
 export function StatBand() {
   return (
-    <section id="stats" className={styles.band}>
+    <section id="stats" className={styles.band} aria-label="Key figures">
       <div className="container">
         <dl className={styles.row}>
           {stats.map((s) => (

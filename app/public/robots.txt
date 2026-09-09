@@ -1,0 +1,10 @@
+# PROTOTYPE — not for indexing.
+#
+# This page reproduces copy, product names and prices that already live on
+# rayobyte.com. Indexing it here would put duplicate content on a second
+# domain, competing with the real site. Blocked until it ships for real.
+#
+# When this becomes a production page: delete these rules, drop the
+# <meta name="robots" content="noindex"> from index.html, and add a Sitemap line.
+User-agent: *
+Disallow: /

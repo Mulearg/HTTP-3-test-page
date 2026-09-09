@@ -5,7 +5,7 @@ const BASE = import.meta.env.BASE_URL
 
 export function Proof() {
   return (
-    <Section id="proof">
+    <Section id="proof" label="Customer proof and use cases">
       <div className={styles.inner}>
         <figure className={styles.testimonial}>
           <img className={styles.quoteMark} src={`${BASE}assets/icons/quote-mark.svg`} alt="" width={34} height={26} />

@@ -29,8 +29,8 @@ export function Footer() {
 
           {/* --- Link columns --------------------------------------------- */}
           {footer.columns.map((col) => (
-            <nav key={col.title} className={styles.column}>
-              <h2 className={styles.columnTitle}>{col.title}</h2>
+            <nav key={col.title} className={styles.column} aria-label={`Footer — ${col.title}`}>
+              <h3 className={styles.columnTitle}>{col.title}</h3>
               <ul className={styles.links}>
                 {col.links.map((l) => {
                   const label = typeof l === 'string' ? l : l.label
@@ -67,7 +67,7 @@ export function Footer() {
                 <img className={styles.socialIcon} src={`${BASE}assets/x.svg`} alt="" width={44} height={44} />
               </a>
             </div>
-            <h2 className={styles.contactTitle}>{footer.contact.title}</h2>
+            <h3 className={styles.contactTitle}>{footer.contact.title}</h3>
             <p className={styles.address}>{footer.contact.address}</p>
             <img className={styles.qr} src={`${BASE}assets/qr.svg`} alt="" width={75} height={76} />
           </div>

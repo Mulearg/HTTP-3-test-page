@@ -508,3 +508,48 @@ Verified with real pointer movement: the diagonal path that previously closed
 the menu now lands on "Resell" with the panel still open; Log in opens with both
 dashboards; moving away closes both; and "Contact Us" is still the top element
 at its own centre while a panel is open.
+
+---
+
+## SEO and document semantics — tier 1
+
+None of this changes a pixel. It changes what a crawler, a share scraper or a
+screen reader gets out of the same page.
+
+**`<h1>` was missing a space.** The artboard breaks the headline across two
+lines, and each line was rendered as its own block-level `<span>`. Visually
+correct; in `textContent` the two text nodes ran together as
+`"HTTP/3 over QUIC,across 40M+ residential IPs"` — which is the string a crawler
+indexes and a screen reader reads. Now joined with a real space, with `<br>`
+doing the visual break.
+
+**Ten `<section>` elements had no accessible name.** A `<section>` is only
+exposed as a `region` landmark once it has one; without it the element is inert
+markup and the page offers no landmark structure to navigate by. `Section.tsx`
+now generates an id for its `<h2>` and points `aria-labelledby` at it, so the
+name can never drift from the visible heading. Two sections needed more: the
+"one credential set" section renders its own `<h2>` inside `children`, so
+`Section` gained a `labelledBy` prop; the proof section has no `<h2>` at all —
+its head is a styled eyebrow — so it takes a literal `label`.
+
+**Four `<nav>` elements, none labelled.** With more than one nav on a page they
+are indistinguishable without names. The header nav is "Primary"; the three
+footer columns take their own column title.
+
+**Footer column titles were `<h2>`.** They sit under no `<h2>`-level topic and
+outrank the section headings above them. Now `<h3>`.
+
+**Head.** Added canonical, favicon, `theme-color`, and full OG/Twitter tags.
+`og:image` is deliberately absent — no 1200×630 asset is committed yet, and a
+broken image reference previews worse than none; `tools/og-card.html` renders
+the card and carries the command that produces it.
+
+**`noindex` and `Disallow: /`, deliberately.** This page reproduces copy,
+product names and prices that already live on rayobyte.com. Indexed on a second
+domain it would compete with the real site for the same terms. Both the meta tag
+and `public/robots.txt` carry a comment saying what to change when the page
+ships as canonical.
+
+**Still open.** Ten AA contrast failures remain, all design-sourced. Server
+rendering is the tier-3 item: nothing above changes the fact that the markup a
+crawler receives is an empty `<div id="root">`.
