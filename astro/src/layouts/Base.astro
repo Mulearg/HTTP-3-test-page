@@ -1,0 +1,71 @@
+---
+/**
+ * The document shell. Identical head to app/index.html, minus the SPA's
+ * <div id="root"> and module script — here the markup is already in the file.
+ */
+import '@app/styles/tokens.css'
+import '@app/styles/base.css'
+
+interface Props {
+  /** Document title, with the brand suffix. */
+  title: string
+  /** Share-card title: the headline alone, no suffix. */
+  shareTitle: string
+  description: string
+  canonical: string
+}
+
+const { title, shareTitle, description, canonical } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- NOINDEX — deliberate, and load-bearing.
+         This page reproduces copy, product names and prices that already live
+         on rayobyte.com. Indexed here it would be duplicate content on a second
+         domain, competing with the real site for the same terms.
+         Remove this line, and the Disallow in robots.txt, only when the page
+         ships as the canonical version. -->
+    <meta name="robots" content="noindex, nofollow" />
+
+    <link rel="canonical" href={canonical} />
+
+    <!-- Plus Jakarta Sans 400-700 is the entire brand.
+         JetBrains Mono is loaded at 400 only, for the two code blocks that
+         need it - a documented exception to "no secondary face"
+         (_rules.scale-gaps in rayobyte.tokens.json). -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#050038" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Share previews. og:image is deliberately absent: no 1200x630 asset
+         exists yet, and a broken image reference previews worse than none.
+         app/tools/og-card.html renders the card and carries the one command
+         that produces it; add og:image and switch twitter:card to
+         summary_large_image once public/og.png is committed. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Rayobyte" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={shareTitle} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={shareTitle} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

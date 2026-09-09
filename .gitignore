@@ -32,3 +32,6 @@ pnpm-debug.log*
 Thumbs.db
 *.suo
 *.sw?
+
+# Astro's generated types and content cache (astro/.astro/).
+.astro/

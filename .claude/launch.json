@@ -12,6 +12,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--prefix", "app"],
       "port": 4173
+    },
+    {
+      "name": "astro-pilot",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview", "--prefix", "astro"],
+      "port": 4321
     }
   ]
 }
