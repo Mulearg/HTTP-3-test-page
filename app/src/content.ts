@@ -14,10 +14,6 @@
    There is deliberately NO pricing section.
 --------------------------------------------------------------------------- */
 
-/** Intentional placeholder. Renders in the design as a real chip, not a note
- *  to self — do not invent numbers to fill it. */
-export const BENCHMARK_PLACEHOLDER = '[YOUR BENCHMARK NUMBERS]'
-
 /* --- 1 · Nav (27949:14) -------------------------------------------------- */
 
 export const nav = {
@@ -145,6 +141,10 @@ export const comparison = {
       affirmative: false,
     },
   ],
+  /* Not rendered. The artboard puts this line, plus a [YOUR BENCHMARK NUMBERS]
+     chip, under the table; both were removed by request because no published
+     figures ever existed to fill the chip. Kept here so the copy is not lost
+     if real benchmark data turns up. */
   footnote:
     'Protocol behaviour is fixed; the gain you see is not. Throughput and latency deltas depend on route and packet-loss rate —',
 }

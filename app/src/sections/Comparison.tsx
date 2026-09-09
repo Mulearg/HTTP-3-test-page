@@ -44,13 +44,11 @@ export function Comparison() {
         </table>
       </div>
 
-      {/* INTENTIONAL PLACEHOLDER, and a real design element — the artboard
-          ships this chip. The docs publish no performance figures, so there is
-          nothing to substitute. Do not invent numbers. */}
-      <p className={table.chipRow} style={{ marginTop: 40 }}>
-        <span className={table.chipText}>{comparison.footnote}</span>
-        <span className={table.chip}>[YOUR BENCHMARK NUMBERS]</span>
-      </p>
+      {/* The artboard ships a footnote here carrying a [YOUR BENCHMARK NUMBERS]
+          placeholder chip. Removed by request — no performance figures were
+          ever published to fill it, so the line only ever advertised a gap.
+          The copy is still in content.ts (comparison.footnote) if it is ever
+          wanted back with real numbers. */}
     </Section>
   )
 }
